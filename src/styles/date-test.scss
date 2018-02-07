@@ -1,0 +1,54 @@
+.full-calendar-body .weeks {
+  color: #333;
+  font-weight: 500;
+  height: 40px;
+  font-size: 14px;
+  line-height: 40px;
+  display: flex;
+  border-top: 1px solid #ededed !important;
+  border-bottom: 1px solid #ededed !important;
+  border-left: 1px solid #ededed !important;
+  background: #fafafa !important;
+}
+.full-calendar-body .weeks .week {
+  flex: 1;
+  text-align: center;
+  border-right: 1px solid #ededed !important;
+}
+.full-calendar-header .header-left, .full-calendar-header .header-right {
+  flex: 0.5 !important;
+}
+.day-number {
+  color: #999;
+  font-size: 18px;
+}
+.full-calendar-body .dates .dates-events .events-week .events-day .event-box .event-item {
+  text-align: left;
+  background-color: transparent !important;
+}
+.full-calendar-body .dates .more-events .more-body .body-list .body-item {
+  background: transparent !important;
+  text-align: left;
+}
+.red {
+  color: #ff4949 !important;
+}
+.normal {
+  color: #666 !important;
+}
+.gray {
+  color: #999 !important;
+}
+.blue {
+  color: #2B65B6 !important;
+}
+.full-calendar-header .header-center .prev-month, .full-calendar-header .header-center .next-month {
+  color: #75839A;
+  &:hover {
+    color: #29cc29;
+  }
+}
+.full-calendar-header .header-center .title {
+  color: #666;
+  cursor: default;
+}

@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import { sync } from 'vuex-router-sync'
+import store from '../store'
+import routes from './routes'
+
+let router = new Router({
+  mode: 'history',
+  routes
+})
 
 Vue.use(Router)
+sync(store, router)
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
-})
+export default router
