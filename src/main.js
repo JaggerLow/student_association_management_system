@@ -9,12 +9,14 @@ import router from './router'
 import store from './store'
 import plugins from './plugins'
 import components from './components'
+import VueResource from 'vue-resource'
 
 Vue.use(Vuex)
 Vue.use(ElementUI)
 Vue.use(plugins)
 Vue.use(components)
 Vue.use(VueScrollTo)
+Vue.use(VueResource)
 
 let vm = new Vue({
   el: '#app',

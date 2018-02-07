@@ -1,1 +1,53 @@
 $font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+$font-size-base: 14px; // 正文信息
+$font-size-secondary: 13px; // 辅助说明
+$font-size-h2: 16px; // 正常标题
+$font-size-h1: 20px; // 大标题
+$line-height: 1.5; // 行高
+$zindex-1: 100;
+$zindex-2: 200;
+$zindex-3: 300;
+$radius: 2px;
+
+// 品牌升级
+// 黑色模块
+$col-deeper-black: #0A0B0D;
+$col-deep-black: #3B4350;
+$col-normal-black: #47505F;
+$col-light-black: #666666;
+$col-lighter-black: #738399;
+
+
+// 灰色模块
+$col-deeper-gray: #999999;
+$col-deep-gray: #CCCCCC;
+$col-normal-gray: #DDDDDD;
+$col-light-gray: #F8F8F8;
+$col-lighter-gray: #FAFAFA;
+
+// 蓝色模块
+$col-normal-blue: #1482FF;
+$col-light-blue: #378CFF;
+$col-lighter-blue: #E4EFFC;
+
+// 红色
+$col-normal-red: #FF504B;
+$col-light-red: #EFD6B6;
+$col-lighter-red: #FFF8E7;
+
+
+// 黄色
+$col-noraml-yellow: #FFAF00;
+
+// 绿色
+$col-noraml-green: #29cc29;
+$col-hover-green: #26b31e;
+
+
+// 白色
+$col-white: #fff;
+
+$color-primary: #1482FF;
+$color-success: #57D92B;
+$color-warning: #FFAF00;
+$color-danger: #FF504B;
