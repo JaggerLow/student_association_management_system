@@ -1,4 +1,5 @@
 import 'font-awesome/css/font-awesome.min.css'
+import 'element-ui/lib/theme-chalk/index.css'
 import './styles/index.scss'
 import Vue from 'vue'
 import Vuex from 'vuex'

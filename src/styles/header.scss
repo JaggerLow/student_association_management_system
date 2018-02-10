@@ -1,0 +1,87 @@
+@import './core/var';
+
+.s-header {
+  background: rgba(255,255,255,.95);
+  border-bottom: 1px solid #ededed;
+  box-shadow: 0 1px 2px 0 #ccc;
+  cursor: default;
+  height: 60px;
+  left: 0px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  &__main {
+    height: 100%;
+    margin: 0 auto;
+    width: 1200px;
+    &--box {
+      float: left;
+      height: 100%;
+      width: 140px;
+    }
+    &--nav {
+      align-items: center;
+      color: $col-dark-blue;
+      display: flex;
+      display: -webkit-flex;
+      cursor: default;
+      float: left;
+      height: 100%;
+      line-height: 60px;
+      overflow: hidden;
+      position: relative;
+      justify-content: center;
+      width: 600px;
+      li { 
+        cursor: pointer;
+        flex: 1;
+        float: left;
+        list-style-type: none;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        &:hover {
+          .s-header__main--navline {
+            display: block !important;
+          }
+        }
+      }
+    }
+    &--navbottom {
+      display: block !important;
+    }
+    &--navline {
+      background: $col-dark-blue;
+      bottom: 5px;
+      cursor: pointer;
+      display: none;
+      height: 3px;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      width: 50px;
+    }
+    &--icon {
+      background: #999;
+      float: left;
+      border-radius: 50%; 
+      height: 40px;
+      margin: 10px 0;
+      width: 40px;
+    }
+    &--info {
+      color: $col-dark-blue;
+      float: left;
+      line-height: 60px;
+      height: 100%;
+      text-align: center;
+      width: 100px;
+      & span {
+        cursor: pointer;
+        &:hover {
+          color: $col-normal-blue;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <s-header></s-header>
     <router-view/>
   </div>
 </template>
@@ -15,6 +16,8 @@ export default {
 
   * {
     box-sizing: border-box !important;
+    margin: 0;
+    padding: 0;
   }
   html,
   body {
