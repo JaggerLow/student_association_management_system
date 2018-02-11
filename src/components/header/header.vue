@@ -36,7 +36,15 @@ export default {
   },
   methods: {
     ...mapActions({
+      setHeaderNav: 'setHeaderNav'
     })
+  },
+  async mounted () {
+    let self = this
+    let nowPath = self.$route.path
+    nowPath = nowPath.split('/')
+    nowPath = nowPath[1]
+    self.setHeaderNav(nowPath)
   }
 }
 </script>

@@ -1,5 +1,8 @@
 /**
  * types 命名规范
  * 1. 使用常量并全部大写
- * 2. 模块命名使用以下形式命名：主模块约定缩写_子模块名称_操作命名
+ * 2. 模块命名使用以下形式命名：主模块约定缩写_操作命名_子模块名称
  */
+
+// 全局
+export const HEADER_SET_BOTTOMLINE = 'HEADER_SET_BOTTOMLINE'
