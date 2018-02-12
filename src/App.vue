@@ -2,6 +2,11 @@
   <div id="app">
     <s-header></s-header>
     <router-view/>
+
+    <!-- 各视图自定义的弹框 -->
+    <div>
+      <s-dialog-login></s-dialog-login>
+    </div>
   </div>
 </template>
 

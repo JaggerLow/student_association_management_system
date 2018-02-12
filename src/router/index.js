@@ -6,7 +6,12 @@ import dynamicRoute from './routes'
 
 let router = new Router({
   mode: 'history',
-  routes: []
+  routes: [
+    {
+      path: '/',
+      redirect: '/home'
+    }
+  ]
 })
 
 Vue.use(Router)

@@ -1,0 +1,44 @@
+@import './core/var';
+.s-dialog {
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+  &__bak {  // 幕布样式
+    background: #000;
+    height: 100%;
+    left: 0;
+    opacity: .3;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1900;
+  }
+  &__box { // 弹框样式
+    background: #fff;
+    border-radius: 4px;
+    min-height: 218px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    padding: 20px 20px 20px 20px;
+    position: fixed;
+    top: 50%;
+    min-width: 400px;
+    z-index: 2000;
+  }
+  &__close {
+    color: #999;
+    cursor: pointer;
+    font-size: 18px;
+    height: 40px;
+    line-height: 40px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 40px;
+    z-index: 2200;
+    &:hover {
+      color: #666;
+    }
+  }
+}

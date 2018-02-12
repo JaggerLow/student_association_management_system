@@ -10,6 +10,7 @@
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 1000;
   &__main {
     height: 100%;
     margin: 0 auto;
