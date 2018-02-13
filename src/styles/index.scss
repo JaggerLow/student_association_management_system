@@ -1,6 +1,9 @@
 @import './core/var';
 @import './header';
+@import './box';
 @import './dialog';
+@import './input';
+@import './checkbox';
 // 修复某些 webkit 浏览器中 placeholder 出现偏上现象
 ::-webkit-input-placeholder {
   line-height: normal;

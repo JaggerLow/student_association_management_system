@@ -1,0 +1,10 @@
+@import './core/var';
+.el-checkbox {
+  color: $col-deeper-gray !important;
+}
+.el-checkbox__input.is-checked+.el-checkbox__label {
+  color: $col-dark-blue !important;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  color: $col-dark-blue !important;
+}

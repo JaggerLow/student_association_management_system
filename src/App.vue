@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <s-header></s-header>
-    <router-view/>
+    <div class="s-wrapper">
+      <router-view/>
+    </div>
+    <s-footer></s-footer>
 
     <!-- 各视图自定义的弹框 -->
     <div>
@@ -35,5 +38,8 @@ export default {
     font: #{$font-size-base}/#{$line-height} #{$font-family};
     margin: 0;
     overflow-x: hidden;
+  }
+  .s-wrapper {
+    padding-top: 60px;
   }
 </style>

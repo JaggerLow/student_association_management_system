@@ -1,0 +1,5 @@
+@import './core/var';
+.el-input__inner:focus {
+  outline: 0;
+  border-color: $col-dark-blue;
+}

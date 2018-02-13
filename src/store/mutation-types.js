@@ -6,3 +6,6 @@
 
 // 全局
 export const HEADER_SET_BOTTOMLINE = 'HEADER_SET_BOTTOMLINE'
+
+// 登录弹框
+export const LOGIN_SET_LOGINWINDOW = 'LOGIN_SET_LOGINWINDOW'
