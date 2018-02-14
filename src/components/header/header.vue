@@ -3,7 +3,7 @@
     <div class="s-header__main">
       <div
         class="s-header__main--box"
-        @click.stop="linkTo('home')">
+        @click.stop="linkTo('/home')">
         <div style="height: 100%; width: 100%; background: #ddd;"></div>
       </div>
       <ul class="s-header__main--nav">
@@ -19,7 +19,7 @@
         <div class="s-header__main--icon"></div>
         <div class="s-header__main--info">
           <div>
-            <span @click.stop="login">登录</span> / <span>注册</span>
+            <span @click.stop="login">登录</span> / <span @click.stop="linkTo('/registered')">注册</span>
           </div>
         </div>
       </div>

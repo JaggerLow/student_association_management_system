@@ -7,7 +7,7 @@
         <div class="s-login__form">
           <el-input
             v-model="loginWindow.form.username"
-            placeholder="手机 / 邮箱">
+            placeholder="用户名">
           </el-input>
           <el-input
             v-model="loginWindow.form.password"
@@ -81,7 +81,7 @@ export default {
       border-radius: 4px;
       color: $col-white;
       cursor: pointer;
-      font-size: 16px;
+      font-size: $font-size-h2;
       line-height: 36px;
       margin: 16px 0;
       height: 36px;
