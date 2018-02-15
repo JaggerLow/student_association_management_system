@@ -3,6 +3,8 @@ const Dynamic = () => import('../views/dynamic').then(m => m.default)
 const Schedule = () => import('../views/schedule').then(m => m.default)
 const Discuss = () => import('../views/discuss').then(m => m.default)
 const Registered = () => import('../views/registered').then(m => m.default)
+const Info = () => import('../views/info').then(m => m.default)
+const Myclub = () => import('../views/myclub').then(m => m.default)
 
 export default data => {
   // 设置默认路由
@@ -31,6 +33,16 @@ export default data => {
       path: '/registered',
       name: Registered.name,
       component: Registered
+    },
+    {
+      path: '/info',
+      name: Info.name,
+      component: Info
+    },
+    {
+      path: '/myclub',
+      name: Myclub.name,
+      component: Myclub
     }
   ]
 

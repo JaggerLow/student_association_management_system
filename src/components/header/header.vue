@@ -18,8 +18,18 @@
       <div class="s-header__main--box" style="float: right;">
         <div class="s-header__main--icon"></div>
         <div class="s-header__main--info">
-          <div>
+          <!-- <div>
             <span @click.stop="login">登录</span> / <span @click.stop="linkTo('/registered')">注册</span>
+          </div> -->
+          <div class="s-header__operate">
+            凉瓜牛肉饭
+            <div>
+              <ul>
+                <li><span @click.stop="linkTo('/info')">个人信息</span></li>
+                <li><span @click.stop="linkTo('/myclub')">我的社团</span></li>
+                <li><span>退出</span></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

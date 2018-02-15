@@ -4,7 +4,7 @@
       <div class="s-footer__left">
         <div class="s-footer__icon"></div>
         <p>课题名称：学生社团管理系统</p>
-        <p>技术栈：基于Vue2 + Egg + MySQL</p>
+        <p>技术栈：基于Vue2 + java + MySQL</p>
         <p>作者邮箱：645091114@qq.com</p>
       </div>
       <div class="s-footer__right">
