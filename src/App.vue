@@ -9,6 +9,7 @@
     <!-- 各视图自定义的弹框 -->
     <div>
       <s-dialog-login></s-dialog-login>
+      <s-dialog-newclub></s-dialog-newclub>
     </div>
   </div>
 </template>

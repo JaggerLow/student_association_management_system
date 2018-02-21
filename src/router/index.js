@@ -17,6 +17,13 @@ let router = new Router({
 Vue.use(Router)
 sync(store, router)
 
+router.beforeEach(async (to, from, next) => {
+  let nowPath = to.path
+  nowPath = nowPath.split('/')
+  nowPath = nowPath[1]
+  store.dispatch('setHeaderNav', nowPath)
+  next()
+})
 router.onReady(async () => {
   router.addRoutes(dynamicRoute())
 })

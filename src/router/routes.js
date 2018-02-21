@@ -5,6 +5,7 @@ const Discuss = () => import('../views/discuss').then(m => m.default)
 const Registered = () => import('../views/registered').then(m => m.default)
 const Info = () => import('../views/info').then(m => m.default)
 const Myclub = () => import('../views/myclub').then(m => m.default)
+const Manageclub = () => import('../views/manageclub').then(m => m.default)
 const Club = () => import('../views/club').then(m => m.default)
 
 export default data => {
@@ -49,6 +50,11 @@ export default data => {
       path: '/club',
       name: Club.name,
       component: Club
+    },
+    {
+      path: '/manageclub',
+      name: Manageclub.name,
+      component: Manageclub
     }
   ]
 

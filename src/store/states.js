@@ -22,5 +22,41 @@ export default {
     ename: 'discuss',
     link: '/discuss',
     focus: false
+  }],
+  clubType: [{
+    label: '学术类',
+    value: '0'
+  },
+  {
+    label: '实践类',
+    value: '1'
+  },
+  {
+    label: '体育类',
+    value: '2'
+  },
+  {
+    label: '艺术类',
+    value: '3'
+  },
+  {
+    label: '团学组织',
+    value: '4'
+  },
+  {
+    label: '其他',
+    value: '5'
+  }],
+  clubLevel: [{
+    label: '校级组织',
+    value: '0'
+  },
+  {
+    label: '院级组织',
+    value: '1'
+  },
+  {
+    label: '兴趣社团',
+    value: '2'
   }]
 }

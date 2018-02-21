@@ -70,23 +70,9 @@ export default {
     linkTo (url) {
       let self = this
       self.$router.push(url)
-      self.getNowPath()
-    },
-
-    /**
-     * 获取当前路径
-     */
-    getNowPath () {
-      let self = this
-      let nowPath = self.$route.path
-      nowPath = nowPath.split('/')
-      nowPath = nowPath[1]
-      self.setHeaderNav(nowPath)
     }
   },
   async mounted () {
-    let self = this
-    self.getNowPath()
   }
 }
 </script>

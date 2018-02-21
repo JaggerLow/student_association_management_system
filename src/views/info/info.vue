@@ -124,11 +124,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../styles/core/var';
-.s-info {
-  &__form {
-    margin-bottom: 30px;
-    width: 400px;
+  @import '../../styles/core/var';
+  .s-info {
+    &__form {
+      margin-bottom: 30px;
+      width: 400px;
+    }
   }
-}
 </style>

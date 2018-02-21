@@ -6,13 +6,15 @@ import mutations from './mutations'
 import actions from './actions'
 import sLogin from './modules/login'
 import viewsInfo from './modules/views/info'
+import viewsMyclubNewclub from './modules/views/myclub/newclub'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     sLogin,
-    viewsInfo
+    viewsInfo,
+    viewsMyclubNewclub
   },
   state,
   getters,

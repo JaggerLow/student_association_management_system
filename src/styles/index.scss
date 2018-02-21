@@ -6,6 +6,8 @@
 @import './checkbox';
 @import './button';
 @import './pagefooter';
+@import './select';
+@import './sidebar';
 // 修复某些 webkit 浏览器中 placeholder 出现偏上现象
 ::-webkit-input-placeholder {
   line-height: normal;

@@ -15,6 +15,10 @@ let getters = {
 }
 
 let mutations = {
+
+  /**
+   * 设置登录框信息
+   */
   [types.LOGIN_SET_LOGINWINDOW] (state, payload) {
     for (let prop in payload) {
       state.loginWindow[prop] = payload[prop]
@@ -23,6 +27,10 @@ let mutations = {
 }
 
 let actions = {
+
+  /**
+   * 更新登陆框信息
+   */
   updateLoginWindow ({ commit }, payload) {
     commit(types.LOGIN_SET_LOGINWINDOW, payload)
   }

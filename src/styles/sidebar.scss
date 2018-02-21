@@ -1,0 +1,9 @@
+@import './core/var';
+.el-menu-item:focus, .el-menu-item:hover {
+  background-color: inherit;
+  color: $col-dark-blue;
+  outline: 0;
+}
+.el-menu-item.is-active {
+  color: $col-dark-blue;
+}

@@ -1,0 +1,10 @@
+@import './core/var';
+.el-select .el-input__inner:focus {
+  border-color: $col-dark-blue;
+}
+.el-select-dropdown__item.selected {
+  color: $col-dark-blue;
+}
+.s-select__form {
+  width: 320px;
+}
