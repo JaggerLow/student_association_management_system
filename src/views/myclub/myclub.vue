@@ -6,10 +6,14 @@
     </div>
     <div class="s-myclub__main">
       <div class="s-myclub__main--card">
-        <div class="s-myclub__main--logo">
+        <div
+          class="s-myclub__main--logo"
+          @click.stop="linkToClub">
         </div>
         <div class="s-myclub__main--info">
-          <div class="s-myclub__main--name">社团名称</div>
+          <div class="s-myclub__main--name">
+            <span @click.stop="linkToClub">社团名称</span>
+          </div>
           <div class="s-myclub__main--introduction">
             该社团暂无任何介绍~~
           </div>
@@ -44,6 +48,14 @@ export default {
      */
     changePage (val) {
       console.log(val)
+    },
+
+    /**
+     * 跳转社团首页
+     */
+    linkToClub () {
+      let self = this
+      self.$router.push('/club')
     }
   }
 }
@@ -96,6 +108,7 @@ export default {
     }
     &--logo {
       background: #999;
+      cursor: pointer;
       float: left;
       height: 100%;
       width: 130px;
@@ -109,6 +122,12 @@ export default {
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 100%;
+      span {
+        cursor: pointer;
+        &:hover {
+          color: $col-dark-blue;
+        }
+      }
     }
     &--operate {
       float: left;
