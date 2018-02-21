@@ -5,6 +5,7 @@ const Discuss = () => import('../views/discuss').then(m => m.default)
 const Registered = () => import('../views/registered').then(m => m.default)
 const Info = () => import('../views/info').then(m => m.default)
 const Myclub = () => import('../views/myclub').then(m => m.default)
+const Club = () => import('../views/club').then(m => m.default)
 
 export default data => {
   // 设置默认路由
@@ -43,6 +44,11 @@ export default data => {
       path: '/myclub',
       name: Myclub.name,
       component: Myclub
+    },
+    {
+      path: '/club',
+      name: Club.name,
+      component: Club
     }
   ]
 
