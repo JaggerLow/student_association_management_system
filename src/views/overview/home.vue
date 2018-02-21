@@ -1,14 +1,12 @@
 <template>
   <div class="s-home">
     <div class="s-box">
-      <div class="s-box__context">
-        <div class="s-home__carousel">
-          <el-carousel height="640px">
-            <el-carousel-item v-for="item in 4" :key="item">
-              <h3>{{ item }} 活动信息</h3>
-            </el-carousel-item>
-          </el-carousel>
-        </div>
+      <div class="s-home__carousel">
+        <el-carousel height="640px">
+          <el-carousel-item v-for="item in 4" :key="item">
+            <h3>{{ item }} 活动信息</h3>
+          </el-carousel-item>
+        </el-carousel>
       </div>
       <div class="s-home__news">
         公告/新闻/活动

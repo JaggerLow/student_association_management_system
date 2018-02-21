@@ -1,0 +1,24 @@
+@import './core/var';
+.button-bgcolor {
+  &__normal {
+    background: $col-dark-blue;
+    &:hover {
+      background: $col-normal-blue;
+    }
+  }
+  &__red {
+    background: $col-dark-red;
+    &:hover {
+      background: $col-normal-red;
+    }
+  }
+}
+.el-button--primary {
+  color: #fff;
+  background-color: $col-dark-blue;
+  border-color: $col-dark-blue;
+  &:hover {
+    background: $col-normal-blue;
+    border-color: $col-normal-blue;
+  }
+}

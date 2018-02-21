@@ -2,6 +2,19 @@
 .s-box {
   background: $col-white;
   margin: 0 auto;
-  .s-box__context {
+  &__context {
+    margin: 0 auto;
+    width: 1200px;
+  }
+  &__header {
+    border-bottom: 1px solid $col-border;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: $col-dark-blue;
+    cursor: default;
+    font-size: 16px;
+    margin-top: 30px;
+    line-height: 60px;
+    height: 60px;
   }
 }

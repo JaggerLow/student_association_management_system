@@ -5,7 +5,7 @@
         <div class="s-footer__icon"></div>
         <p>课题名称：学生社团管理系统</p>
         <p>技术栈：基于Vue2 + java + MySQL</p>
-        <p>作者邮箱：645091114@qq.com</p>
+        <p>github：<a href="https://github.com/ly645091114" target="_blank">github.com/ly645091114</a></p>
       </div>
       <div class="s-footer__right">
         <div class="s-footer__icon">
@@ -13,7 +13,7 @@
         </div>
         <p>姓名：梁宇</p>
         <p>学校：广州大学华软软件学院</p>
-        <p>github：<a href="https://github.com/ly645091114" target="_blank">github.com/ly645091114</a></p>
+        <p>作者邮箱：645091114@qq.com</p>
       </div>
     </div>
     <div class="s-footer__bottom">14届 嵌统2班 梁宇 毕业设计</div>
