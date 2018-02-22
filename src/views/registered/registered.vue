@@ -10,7 +10,7 @@
         style="margin-top: 30px;">
         <el-form-item label="用户名">
           <el-input
-            v-model="form.name"
+            v-model="form.username"
             placeholder="请输入用户名">
           </el-input>
         </el-form-item>
@@ -45,7 +45,7 @@ export default {
   data () {
     return {
       form: {
-        name: '',
+        username: '',
         email: '',
         password: '',
         checkpassword: ''
@@ -63,23 +63,11 @@ export default {
     }),
 
     /**
-     * 获取当前路径
-     */
-    getNowPath () {
-      let self = this
-      let nowPath = self.$route.path
-      nowPath = nowPath.split('/')
-      nowPath = nowPath[1]
-      self.setHeaderNav(nowPath)
-    },
-
-    /**
      * 跳转回首页
      */
     turnHome () {
       let self = this
       self.$router.push('/home')
-      self.getNowPath()
     }
   }
 }

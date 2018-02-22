@@ -1,9 +1,10 @@
 <template>
-  <div class="s-members">
-    <div class="s-members__header">
+  <div class="s-box__manage">
+    <div class="s-box__manage--header">
       <el-select
         class="s-select__search"
         v-model="members.search.clubDepartment"
+        size="small"
         placeholder="请选择部门">
         <el-option
           v-for="(clubDepartment, index) in members.clubDepartmentList"
@@ -15,6 +16,7 @@
       <el-select
         class="s-select__search"
         v-model="members.search.position"
+        size="small"
         placeholder="请选择职位">
         <el-option
           v-for="(position, index) in members.positionList"
@@ -27,6 +29,7 @@
         class="s-input__search"
         v-model="members.search.name"
         placeholder="请输入成员名称"
+        size="small"
         @keyup.native.enter="searchTable">
         <el-button
           slot="append"
@@ -56,7 +59,8 @@
       <el-table-column
         prop="department"
         label="系别"
-        width="160">
+        width="160"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="startYear"
@@ -116,12 +120,4 @@ export default {
 </script>
 <style lang="scss" scoped>
   @import '../../../styles/core/var';
-  .s-members {
-    width: 100%;
-    &__header {
-      border-bottom: 1px solid $col-border;
-      height: 60px;
-      width: 100%;
-    }
-  }
 </style>

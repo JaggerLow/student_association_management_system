@@ -6,7 +6,7 @@
       <div class="s-dialog__main">
         <div class="s-login__form">
           <el-input
-            v-model="loginWindow.form.username"
+            v-model="loginWindow.form.email"
             placeholder="用户名">
           </el-input>
           <el-input

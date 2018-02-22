@@ -35,6 +35,7 @@
         <apply v-if="showPage === '3'"></apply>
         <architecture v-if="showPage === '4'"></architecture>
         <activity v-if="showPage === '5'"></activity>
+        <album v-if="showPage === '6'"></album>
       </div>
     </div>
   </div>
@@ -45,6 +46,7 @@ import Members from './page/members'
 import Apply from './page/apply'
 import Architecture from './page/architecture'
 import Activity from './page/activity'
+import Album from './page/album'
 export default {
   name: 'Manageclub',
   data () {
@@ -57,7 +59,8 @@ export default {
     Members,
     Apply,
     Architecture,
-    Activity
+    Activity,
+    Album
   },
   methods: {
 

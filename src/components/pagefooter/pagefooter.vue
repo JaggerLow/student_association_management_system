@@ -65,7 +65,7 @@ export default {
       } else if (noticePage < 1) {
         self.inputValue = 1
       } else {
-        self.inputValue = noticePage
+        self.inputValue = Number(noticePage)
       }
       self.$emit('changePage', self.inputValue)
     }

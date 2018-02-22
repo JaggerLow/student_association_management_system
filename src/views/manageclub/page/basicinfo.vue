@@ -1,5 +1,5 @@
 <template>
-  <div class="s-basicinfo">
+  <div class="s-box__manage">
     <el-form
       ref="form"
       class="s-form"

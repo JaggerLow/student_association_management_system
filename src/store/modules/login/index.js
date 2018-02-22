@@ -3,7 +3,7 @@ let state = {
   loginWindow: {
     isShow: false,
     form: {
-      username: '',
+      email: '',
       password: '',
       remember: false
     }

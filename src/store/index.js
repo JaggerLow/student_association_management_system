@@ -9,6 +9,10 @@ import viewsInfo from './modules/views/info'
 import viewsMyclubNewclub from './modules/views/myclub/newclub'
 import viewsManageclubBasicinfo from './modules/views/manageclub/basicinfo'
 import viewsManageclubMembers from './modules/views/manageclub/members'
+import viewsManageclubApply from './modules/views/manageclub/apply'
+import viewsManageclubArchitecture from './modules/views/manageclub/architecture'
+import viewsManageclubActivity from './modules/views/manageclub/activity'
+import viewsManageclubAlbum from './modules/views/manageclub/album'
 
 Vue.use(Vuex)
 
@@ -18,7 +22,11 @@ export default new Vuex.Store({
     viewsInfo,
     viewsMyclubNewclub,
     viewsManageclubBasicinfo,
-    viewsManageclubMembers
+    viewsManageclubMembers,
+    viewsManageclubApply,
+    viewsManageclubArchitecture,
+    viewsManageclubActivity,
+    viewsManageclubAlbum
   },
   state,
   getters,
