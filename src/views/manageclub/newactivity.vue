@@ -6,7 +6,7 @@
     <div class="s-newactivity">
       <el-form
         ref="form"
-        class="s-form"
+        class="s-form s-newactivity__form"
         :model="newactivity.form"
         label-width="80px"
         label-position="left"
@@ -32,17 +32,41 @@
         </el-form-item>
         <el-form-item label="开始时间">
           <el-date-picker
+            class="s-short-datepicker"
             v-model="newactivity.form.startDate"
             type="date"
             placeholder="请选择开始日期">
           </el-date-picker>
+          <el-select
+            class="s-select__form--short"
+            v-model="newactivity.form.startTime"
+            placeholder="请选择活动时间">
+            <el-option
+              v-for="(type, index) in activityType"
+              :key="index"
+              :label="type.label"
+              :value="type.value">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="结束时间">
           <el-date-picker
+            class="s-short-datepicker"
             v-model="newactivity.form.endDate"
             type="date"
             placeholder="请选择结束日期">
           </el-date-picker>
+          <el-select
+            class="s-select__form--short"
+            v-model="newactivity.form.endTime"
+            placeholder="请选择活动时间">
+            <el-option
+              v-for="(type, index) in activityType"
+              :key="index"
+              :label="type.label"
+              :value="type.value">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="活动地点">
           <el-input
@@ -70,6 +94,7 @@
           <el-input
             v-model="newactivity.form.description"
             type="textarea"
+            :autosize="{ minRows: 2 }"
             placeholder="请对活动进行描述...">
           </el-input>
         </el-form-item>
@@ -77,6 +102,9 @@
           <el-button type="primary">创建活动</el-button>
         </el-form-item>
       </el-form>
+      <div class="s-newactivity__image">
+        海报预览
+      </div>
     </div>
   </div>
 </template>
@@ -100,6 +128,20 @@ export default {
   @import '../../styles/core/var';
   .s-newactivity {
     min-height: 500px;
+    overflow: hidden;
     width: 100%;
+    &__form {
+      float: left;
+      margin-left: 30px;
+    }
+    &__image {
+      background: #eee;
+      float: right;
+      height: 400px;
+      margin-right: 200px;
+      margin-top: 30px;
+      width: 300px;
+      z-index: 100;
+    }
   }
 </style>

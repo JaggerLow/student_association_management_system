@@ -7,7 +7,7 @@ let state = {
     nativePlace: '',
     department: '',
     profession: '',
-    class: '',
+    grade: '',
     email: '',
     phone: '',
     startYear: '',

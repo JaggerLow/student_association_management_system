@@ -35,6 +35,13 @@
       </el-table-column>
       <el-table-column
         label="操作">
+        <template slot-scope="scope">
+          <div class="s-table__operate">
+            <div>
+              <span class="s-table__operate--delete">删除活动</span>
+            </div>
+          </div>
+        </template>
       </el-table-column>
     </el-table>
     <s-pagefooter

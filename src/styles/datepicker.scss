@@ -1,0 +1,21 @@
+@import './core/var';
+
+.s-datepicker {
+  width: 320px !important;
+}
+
+.s-short-datepicker {
+  width: 160px !important;
+}
+
+.el-date-picker__header-label.active,
+.el-date-picker__header-label:hover,
+.el-date-table td.available:hover,
+.el-date-table td.today span,
+.el-picker-panel__icon-btn:hover,
+.el-year-table td .cell:hover, .el-year-table td.current:not(.disabled) .cell {
+  color: $col-dark-blue;
+}
+.el-date-table td.current:not(.disabled) span {
+  background-color: $col-dark-blue;
+}

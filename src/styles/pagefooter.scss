@@ -11,15 +11,18 @@
     min-width: 147px;
     &--click {
       color: $col-deep-gray;
-      cursor: pointer;
+      cursor: default;
       float: left;
       font-size: 17px;
       line-height: 30px;
       height: 30px;
       text-align: center;
       width: 42px;
-      &:hover {
-        color: $col-dark-blue;
+      i {
+        cursor: pointer;
+        &:hover {
+          color: $col-dark-blue;
+        }
       }
     }
     &--input {

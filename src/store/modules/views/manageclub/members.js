@@ -1,3 +1,4 @@
+import * as types from '@/store/mutation-types'
 let state = {
   members: {
     search: {
@@ -31,7 +32,19 @@ let state = {
     {
       name: '部长',
       id: '2'
-    }]
+    }],
+    isClubdepartShow: false,
+    clubdepartForm: {
+      id: ''
+    },
+    isPositionShow: false,
+    positionForm: {
+      id: ''
+    },
+    isPermitShow: false,
+    permitForm: {
+      permit: ''
+    }
   }
 }
 
@@ -39,9 +52,27 @@ let getters = {
   members: state => state.members
 }
 
-let mutations = {}
+let mutations = {
 
-let actions = {}
+  /**
+   * 设置社团成员信息
+   */
+  [types.MEMBERS_SET_MEMBERS] (state, payload) {
+    for (let prop in payload) {
+      state.members[prop] = payload[prop]
+    }
+  }
+}
+
+let actions = {
+
+  /**
+   * 更新社团成员信息
+   */
+  updateMembers ({ commit }, payload) {
+    commit(types.MEMBERS_SET_MEMBERS, payload)
+  }
+}
 
 export default {
   namespaced: true,

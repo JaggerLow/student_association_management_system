@@ -2,7 +2,7 @@
   <div class="s-box__manage">
     <el-form
       ref="form"
-      class="s-form"
+      class="s-form s-basicinfo__form"
       :model="info.form"
       label-width="80px"
       label-position="left">
@@ -49,6 +49,7 @@
         <el-input
           v-model="info.form.introduction"
           type="textarea"
+          :autosize="{ minRows: 2 }"
           placeholder="请输入社团简介...">
         </el-input>
       </el-form-item>
@@ -56,6 +57,7 @@
         <el-input
           v-model="info.form.announcement"
           type="textarea"
+          :autosize="{ minRows: 2 }"
           placeholder="请输入社团公告...">
         </el-input>
       </el-form-item>
@@ -63,6 +65,10 @@
         <el-button type="primary">保 存</el-button>
       </el-form-item>
     </el-form>
+    <div class="s-basicinfo__logo">
+      <div class="s-basicinfo__logo--image"></div>
+      <div class="s-basicinfo__logo--button">上传图片</div>
+    </div>
   </div>
 </template>
 <script>
@@ -87,7 +93,35 @@ export default {
   .s-basicinfo {
     width: 100%;
     &__form {
-      width: 400px;
+      float: left;
+    }
+    &__logo {
+      float: left;
+      height: 300px;
+      margin-left: 200px;
+      width: 200px;
+      &--button {
+        border: 1px solid $col-button-border;
+        border-radius: 4px;
+        cursor: pointer;
+        color: $col-deepest-gray;
+        font-size: 14px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        width: 100%;
+        &:hover {
+          border-color: $col-normal-blue;
+          color: $col-dark-blue
+        }
+      }
+      &--image {
+        background: #eee;
+        border: 1px solid $col-border;
+        height: 200px;
+        margin-bottom: 20px;
+        width: 100%;
+      }
     }
   }
 </style>

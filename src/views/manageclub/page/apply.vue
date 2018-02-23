@@ -55,6 +55,19 @@
       </el-table-column>
       <el-table-column
         label="操作">
+        <template slot-scope="scope">
+          <div class="s-table__operate">
+            <div>
+              <span class="s-table__operate--agree">同意</span>
+            </div>
+            <div>
+              <span class="s-table__operate--delete">拒绝</span>
+            </div>
+            <div>
+              <span class="s-table__operate--default">查看</span>
+            </div>
+          </div>
+        </template>
       </el-table-column>
     </el-table>
     <s-pagefooter

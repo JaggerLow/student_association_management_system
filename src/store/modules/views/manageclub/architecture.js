@@ -1,3 +1,4 @@
+import * as types from '@/store/mutation-types'
 let state = {
   architecture: {
     clubDepartment: [{
@@ -39,7 +40,15 @@ let state = {
     {
       name: '干事',
       id: 7
-    }]
+    }],
+    isDepartShow: false,
+    departForm: {
+      name: ''
+    },
+    isPositionShow: false,
+    positionForm: {
+      name: ''
+    }
   }
 }
 
@@ -47,9 +56,27 @@ let getters = {
   architecture: state => state.architecture
 }
 
-let mutations = {}
+let mutations = {
 
-let actions = {}
+  /**
+   * 设置社团架构信息
+   */
+  [types.ARCHITECTURE_SET_ARCHITECTURE] (state, payload) {
+    for (let prop in payload) {
+      state.architecture[prop] = payload[prop]
+    }
+  }
+}
+
+let actions = {
+
+  /**
+   * 更新社团架构信息
+   */
+  updateArchitecture ({ commit }, payload) {
+    commit(types.ARCHITECTURE_SET_ARCHITECTURE, payload)
+  }
+}
 
 export default {
   namespaced: true,

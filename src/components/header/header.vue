@@ -9,6 +9,7 @@
       <ul class="s-header__main--nav">
         <li
           v-for="(nav, index) in headerNav"
+           :class="[nav.focus? 's-header__main--activecolor' : '']"
           :key="index"
           @click.stop="linkTo(nav.link)">
           <span>{{ nav.name }}</span>

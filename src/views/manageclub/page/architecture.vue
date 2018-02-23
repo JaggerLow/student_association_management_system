@@ -6,7 +6,8 @@
         <el-button
           class="s-architecture__box--button"
           type="primary"
-          size="small">
+          size="small"
+          @click.stop="openDepartWindow">
           新建部门
         </el-button>
       </div>
@@ -25,7 +26,8 @@
         <el-button
           class="s-architecture__box--button"
           type="primary"
-          size="small">
+          size="small"
+          @click.stop="openPositionWindow">
           新建职位
         </el-button>
       </div>
@@ -51,7 +53,28 @@ export default {
   },
   methods: {
     ...mapActions({
-    })
+      updateArchitecture: 'viewsManageclubArchitecture/updateArchitecture'
+    }),
+
+    /**
+     * 打开新建部门窗口
+     */
+    openDepartWindow () {
+      let self = this
+      self.updateArchitecture({
+        isDepartShow: true
+      })
+    },
+
+    /**
+     * 打开新建职位窗口
+     */
+    openPositionWindow () {
+      let self = this
+      self.updateArchitecture({
+        isPositionShow: true
+      })
+    }
   }
 }
 </script>

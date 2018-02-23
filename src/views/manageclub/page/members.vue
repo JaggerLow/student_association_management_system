@@ -79,6 +79,22 @@
       </el-table-column>
       <el-table-column
         label="操作">
+        <template slot-scope="scope">
+          <div class="s-table__operate">
+            <div>
+              <span class="s-table__operate--default" @click.stop="openClubDepart">部门</span>
+            </div>
+            <div>
+              <span class="s-table__operate--default" @click.stop="openClubPosition">职位</span>
+            </div>
+            <div>
+              <span class="s-table__operate--default" @click.stop="openClubPermit">权限</span>
+            </div>
+            <div>
+              <span class="s-table__operate--delete">删除</span>
+            </div>
+          </div>
+        </template>
       </el-table-column>
     </el-table>
     <s-pagefooter
@@ -100,7 +116,38 @@ export default {
   },
   methods: {
     ...mapActions({
+      updateMembers: 'viewsManageclubMembers/updateMembers'
     }),
+
+    /**
+     * 打开分配部门弹框
+     */
+    openClubDepart () {
+      let self = this
+      self.updateMembers({
+        isClubdepartShow: true
+      })
+    },
+
+    /**
+     * 打开分配职位弹框
+     */
+    openClubPosition () {
+      let self = this
+      self.updateMembers({
+        isPositionShow: true
+      })
+    },
+
+    /**
+     * 打开权限职位弹框
+     */
+    openClubPermit () {
+      let self = this
+      self.updateMembers({
+        isPermitShow: true
+      })
+    },
 
     /**
      * 表单筛选

@@ -1,0 +1,39 @@
+@import './core/var';
+
+.s-table {
+  &__operate {
+    align-items: center;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    width: 100%;
+    div {
+      flex: 1;
+      span {
+        cursor: default;
+        color: $col-deepest-gray;
+      }
+    }
+    &--default {
+      cursor: pointer !important;
+      color: $col-dark-blue !important;
+      &:hover {
+        color: $col-normal-blue !important;
+      }
+    }
+    &--delete {
+      cursor: pointer !important;
+      color: $col-dark-red !important;
+      &:hover {
+        color: $col-normal-red !important;
+      }
+    }
+    &--agree {
+      cursor: pointer !important;
+      color: $color-success !important;
+      &:hover {
+        color: $col-hover-green !important;
+      }
+    }
+  }
+}

@@ -10,6 +10,11 @@
     <div>
       <s-dialog-login></s-dialog-login>
       <s-dialog-newclub></s-dialog-newclub>
+      <s-dialog-newdepartment></s-dialog-newdepartment>
+      <s-dialog-newposition></s-dialog-newposition>
+      <s-dialog-clubdepartment></s-dialog-clubdepartment>
+      <s-dialog-clubposition></s-dialog-clubposition>
+      <s-dialog-clubpermit></s-dialog-clubpermit>
     </div>
   </div>
 </template>
