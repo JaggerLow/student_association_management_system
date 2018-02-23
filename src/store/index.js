@@ -13,6 +13,7 @@ import viewsManageclubApply from './modules/views/manageclub/apply'
 import viewsManageclubArchitecture from './modules/views/manageclub/architecture'
 import viewsManageclubActivity from './modules/views/manageclub/activity'
 import viewsManageclubAlbum from './modules/views/manageclub/album'
+import viewsManageclubNewactivity from './modules/views/manageclub/newactivity'
 
 Vue.use(Vuex)
 
@@ -26,7 +27,8 @@ export default new Vuex.Store({
     viewsManageclubApply,
     viewsManageclubArchitecture,
     viewsManageclubActivity,
-    viewsManageclubAlbum
+    viewsManageclubAlbum,
+    viewsManageclubNewactivity
   },
   state,
   getters,

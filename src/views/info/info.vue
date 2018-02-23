@@ -5,7 +5,7 @@
     </div>
     <el-form
       ref="form"
-      class="s-info__form"
+      class="s-form"
       :model="form"
       label-width="80px"
       label-position="left"
@@ -125,10 +125,4 @@ export default {
 </script>
 <style lang="scss" scoped>
   @import '../../styles/core/var';
-  .s-info {
-    &__form {
-      margin-bottom: 30px;
-      width: 400px;
-    }
-  }
 </style>
