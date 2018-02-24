@@ -5,14 +5,14 @@
       class="s-form s-basicinfo__form"
       :model="info.form"
       label-width="80px"
-      label-position="left">
-      <el-form-item label="社团名称">
+      label-position="right">
+      <el-form-item label="社团名称" required>
         <el-input
           v-model="info.form.name"
           placeholder="请输入社团名称">
         </el-input>
       </el-form-item>
-      <el-form-item label="社团类型">
+      <el-form-item label="社团类型" required>
         <el-select
           class="s-select__form"
           v-model="info.form.type"
@@ -25,7 +25,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="社团级别">
+      <el-form-item label="社团级别" required>
         <el-select
           class="s-select__form"
           v-model="info.form.level"

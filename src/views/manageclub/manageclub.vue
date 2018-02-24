@@ -43,7 +43,8 @@
     <s-image-upload
       v-if="info.isUploadShow"
       v-model="info.form.logo"
-      @close="closeUpload">
+      @close="closeUpload"
+      title="社团 Logo">
     </s-image-upload>
   </div>
 </template>

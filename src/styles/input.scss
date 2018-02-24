@@ -10,3 +10,9 @@
 .el-input-group__append .el-button {
   padding: 12px 15px;
 }
+
+.s-input__empty {
+  .el-input__inner {
+    border-color: $color-danger !important;
+  }
+}

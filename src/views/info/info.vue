@@ -9,13 +9,16 @@
         class="s-form s-info__form"
         :model="info.form"
         label-width="80px"
-        label-position="left"
+        label-position="right"
         style="margin-top: 30px;">
-        <el-form-item label="用户名">
+        <el-form-item label="用户名" required>
           <el-input
-            v-model="info.form.name"
+            :class="[!info.mustProp.username ? 's-input__empty' : '']"
+            @focus="clearCheck('username')"
+            v-model="info.form.username"
             placeholder="请输入用户名">
           </el-input>
+          <div v-if="!info.mustProp.username" class="s-form__empty">请填写 用户名</div>
         </el-form-item>
         <el-form-item label="真实姓名">
           <el-input
@@ -32,7 +35,8 @@
             class="s-datepicker"
             v-model="info.form.birthday"
             type="date"
-            placeholder="请选择出生日期">
+            placeholder="请选择出生日期"
+            value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="籍贯">
@@ -77,7 +81,8 @@
             class="s-datepicker"
             v-model="info.form.startYear"
             type="year"
-            placeholder="请选择入学年份">
+            placeholder="请选择入学年份"
+            value-format="yyyy">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="Q Q">
@@ -107,7 +112,8 @@
           </el-input>
         </el-form-item>
         <el-form-item label="">
-          <el-button type="primary">保 存</el-button>
+          <el-button type="primary" @click.stop="updateForm">保 存</el-button>
+          <el-button>重置信息</el-button>
         </el-form-item>
       </el-form>
       <div class="s-info__avatar">
@@ -118,12 +124,14 @@
     <s-image-upload
       v-if="info.isUploadShow"
       v-model="info.form.image"
-      @close="closeUpload">
+      @close="closeUpload"
+      title="个人头像">
     </s-image-upload>
   </div>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { cloneDeep } from 'lodash'
 export default {
   name: 'Info',
   computed: {
@@ -135,6 +143,106 @@ export default {
     ...mapActions({
       updateInfo: 'viewsInfo/updateInfo'
     }),
+
+    /**
+     * 初始化页面信息
+     */
+    initData () {
+      let self = this
+      self.updateInfo({
+        form: {
+          username: '',
+          actualName: '',
+          gender: '0',
+          birthday: '',
+          nativePlace: '',
+          department: '',
+          profession: '',
+          grade: '',
+          email: '',
+          phone: '',
+          startYear: '',
+          qq: '',
+          weixin: '',
+          hobbies: '',
+          selIntroduction: '',
+          image: ''
+        },
+        isUploadShow: false,
+        mustProp: {
+          username: true
+        },
+        packageData: {}
+      })
+    },
+
+    /**
+     * 清除校验结果
+     */
+    clearCheck (prop) {
+      let self = this
+      self.info.mustProp[prop] = true
+    },
+
+    /**
+     * 上传数据打包
+     */
+    packageData () {
+      let self = this
+      let packageData = {}
+      let data = cloneDeep(self.info.form)
+      for (let prop in data) {
+        if (prop !== 'email') {
+          if (data[prop] === null) {
+            packageData[prop] = ''
+          } else {
+            packageData[prop] = data[prop]
+          }
+        }
+      }
+      self.updateInfo({
+        packageData: packageData
+      })
+    },
+
+    /**
+     * 格式校验
+     */
+    checkFormat () {
+      let self = this
+      let check = cloneDeep(self.info.mustProp)
+      for (let prop in check) {
+        if ([null, ''].indexOf(self.info.form[prop]) > -1) {
+          check[prop] = false
+        } else {
+          check[prop] = true
+        }
+      }
+      self.updateInfo({
+        mustProp: check
+      })
+    },
+
+    /**
+     * 保存个人信息
+     */
+    updateForm () {
+      let self = this
+      let isEmpty = false
+      self.checkFormat()
+      for (let item in self.info.mustProp) {
+        if (!self.info.mustProp[item]) {
+          isEmpty = true
+          break
+        }
+      }
+      if (!isEmpty) {
+        self.packageData()
+        console.log(self.info.packageData)
+      } else {
+        self.$message.error('请完善必填信息')
+      }
+    },
 
     /**
      * 打开上传头像弹框
@@ -155,6 +263,12 @@ export default {
         isUploadShow: false
       })
     }
+  },
+  mounted () {
+  },
+  beforeDestroy () {
+    let self = this
+    self.initData()
   }
 }
 </script>

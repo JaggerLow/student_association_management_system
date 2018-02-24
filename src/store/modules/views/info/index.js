@@ -2,7 +2,7 @@ import * as types from '@/store/mutation-types'
 let state = {
   info: {
     form: {
-      name: '',
+      username: '',
       actualName: '',
       gender: '0',
       birthday: '',
@@ -19,7 +19,11 @@ let state = {
       selIntroduction: '',
       image: ''
     },
-    isUploadShow: false
+    isUploadShow: false,
+    mustProp: {
+      username: true
+    },
+    packageData: {}
   }
 }
 

@@ -2,4 +2,11 @@
 .s-form {
   margin-bottom: 30px;
   width: 400px;
+  &__empty {
+    color: $color-danger;
+    cursor: default;
+    font-size: 12px;
+    line-height: 30px;
+    padding-left: 5px;
+  }
 }

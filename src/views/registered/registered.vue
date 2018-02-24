@@ -32,6 +32,17 @@
             placeholder="请再次输入密码">
           </el-input>
         </el-form-item>
+        <el-form-item label="验证码">
+          <el-input
+            class="s-registered__code"
+            v-model="form.code"
+            placeholder="验证码">
+          </el-input>
+          <div
+            class="s-registered__codebutton">
+            获取验证码
+          </div>
+        </el-form-item>
         <div class="s-registered__bottom">注 册</div>
         <div class="s-registered__return"><span @click.stop="turnHome">返回首页</span></div>
       </el-form>
@@ -48,7 +59,8 @@ export default {
         username: '',
         email: '',
         password: '',
-        checkpassword: ''
+        checkpassword: '',
+        code: ''
       }
     }
   },
@@ -105,6 +117,26 @@ export default {
       transform: translateX(-50%) translateY(-50%);
       top: 50%;
       width: 400px;
+    }
+    &__code {
+      float: left;
+      width: 120px;
+    }
+    &__codebutton {
+      border: 1px solid $col-border;
+      border-radius: 4px;
+      color: $col-deepest-gray;
+      cursor: pointer;
+      float: left;
+      height: 40px;
+      line-height: 40px;
+      margin-left: 20px;
+      text-align: center;
+      width: 120px;
+      &:hover {
+        border-color: $col-dark-blue;
+        color: $col-dark-blue;
+      }
     }
     &__return {
       color: $col-deeper-gray;

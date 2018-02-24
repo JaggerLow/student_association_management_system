@@ -4,7 +4,7 @@
       <div class="s-footer__left">
         <div class="s-footer__icon"></div>
         <p>课题名称：学生社团管理系统</p>
-        <p>技术栈：基于Vue2 + java + MySQL</p>
+        <p>技术栈：基于Vue2 + Java + MySQL</p>
         <p>github：<a href="https://github.com/ly645091114" target="_blank">github.com/ly645091114</a></p>
       </div>
       <div class="s-footer__right">

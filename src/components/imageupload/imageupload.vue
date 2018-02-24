@@ -2,7 +2,7 @@
   <div class="s-dialog">
     <div class="s-dialog__bak"></div>
     <div class="s-dialog__box">
-      <div class="s-dialog__box--title">上传图片</div>
+      <div class="s-dialog__box--title">{{ title }}</div>
       <div class="s-dialog__main">
         <div class="image-upload__main">
           <div class="image-upload__main--cropper">
@@ -77,6 +77,10 @@ export default {
     action: {
       type: String,
       default: ''
+    },
+    title: {
+      type: String,
+      default: '上传图片'
     }
   },
   components: {
