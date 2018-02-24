@@ -67,7 +67,7 @@
     </el-form>
     <div class="s-basicinfo__logo">
       <div class="s-basicinfo__logo--image"></div>
-      <div class="s-basicinfo__logo--button">上传图片</div>
+      <div class="s-basicinfo__logo--button" @click.stop="uploadImage">上传图片</div>
     </div>
   </div>
 </template>
@@ -84,7 +84,18 @@ export default {
   },
   methods: {
     ...mapActions({
-    })
+      updateBasicinfo: 'viewsManageclubBasicinfo/updateBasicinfo'
+    }),
+
+    /**
+     * 打开上传头像弹框
+     */
+    uploadImage () {
+      let self = this
+      self.updateBasicinfo({
+        isUploadShow: true
+      })
+    }
   }
 }
 </script>

@@ -23,7 +23,7 @@
             <span @click.stop="login">登录</span> / <span @click.stop="linkTo('/registered')">注册</span>
           </div> -->
           <div class="s-header__operate">
-            凉瓜牛肉饭
+            <p>凉瓜牛肉饭</p>
             <div>
               <ul>
                 <li><span @click.stop="linkTo('/info')">个人信息</span></li>

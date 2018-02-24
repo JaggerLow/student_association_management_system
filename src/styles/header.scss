@@ -92,6 +92,13 @@
   }
   &__operate {
     position: relative;
+    p {
+      overflow: hidden;
+      padding: 0 5px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+    }
     &:hover {
       div {
         display: block;

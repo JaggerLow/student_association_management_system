@@ -1,0 +1,71 @@
+@import './core/var';
+.image-upload {
+  &__main {
+    display: inline-block;
+    margin-bottom: 30px;
+    height: 300px;
+    position: relative;
+    width: 450px;
+    &--operate, &--cropper {
+      float: left;
+      height: 300px;
+    }
+    &--cropper {
+      background: #f4f4f4;
+      width: 300px;
+      .vue-cropper {
+        background: #f4f4f4 !important;
+      }
+    }
+    &--operate {
+      cursor: default;
+      margin-left: 30px;
+      width: 120px;
+    }
+    &--upload {
+      display: block;
+      cursor: pointer;
+      border: 1px solid $col-border;
+      border-radius: 4px;
+      color: $col-deepest-gray;
+      font-size: $font-size-base;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      width: 120px;
+      &:hover {
+        color: $col-dark-blue;
+        border-color: $col-dark-blue;
+      }
+    }
+    &--tips {
+      color: $col-deepest-gray;
+      font-size: 12px;
+      line-height: 16px;
+      margin-top: 10px;
+    }
+    &--circleimg, &--squareimg {
+      background: #f4f4f4;
+      height: 72px;
+      overflow: hidden;
+      width: 72px;
+      & img {
+        height: 72px;
+        width: 72px;
+      }
+    }
+    &--circleimg {
+      border-radius: 50%;
+      margin-top: 62px;
+    }
+    &--squareimg {
+      margin-top: 16px;
+    }
+  }
+  &__footer {
+    align-items: center;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+  }
+}

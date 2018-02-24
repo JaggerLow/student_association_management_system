@@ -1,46 +1,54 @@
 <template>
-  <div class="s-box__context">
-    <div class="s-box__header">
-      社团管理
-    </div>
-    <div class="s-manageclub__main">
-      <div class="s-manageclub__sidebar">
-        <el-menu
-          default-active="1"
-          @select="selectMenu"
-          class="el-menu-vertical-demo">
-          <el-menu-item index="1">
-            <span slot="title">基本信息</span>
-          </el-menu-item>
-          <el-menu-item index="2">
-            <span slot="title">社团成员</span>
-          </el-menu-item>
-          <el-menu-item index="3">
-            <span slot="title">申请列表</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <span slot="title">社团架构</span>
-          </el-menu-item>
-          <el-menu-item index="5">
-            <span slot="title">社团活动</span>
-          </el-menu-item>
-          <el-menu-item index="6">
-            <span slot="title">社团相册</span>
-          </el-menu-item>
-        </el-menu>
+  <div>
+    <div class="s-box__context">
+      <div class="s-box__header">
+        社团管理
       </div>
-      <div class="s-manageclub__box">
-        <basicinfo v-if="showPage === '1'"></basicinfo>
-        <members v-if="showPage === '2'"></members>
-        <apply v-if="showPage === '3'"></apply>
-        <architecture v-if="showPage === '4'"></architecture>
-        <activity v-if="showPage === '5'"></activity>
-        <album v-if="showPage === '6'"></album>
+      <div class="s-manageclub__main">
+        <div class="s-manageclub__sidebar">
+          <el-menu
+            default-active="1"
+            @select="selectMenu"
+            class="el-menu-vertical-demo">
+            <el-menu-item index="1">
+              <span slot="title">基本信息</span>
+            </el-menu-item>
+            <el-menu-item index="2">
+              <span slot="title">社团成员</span>
+            </el-menu-item>
+            <el-menu-item index="3">
+              <span slot="title">申请列表</span>
+            </el-menu-item>
+            <el-menu-item index="4">
+              <span slot="title">社团架构</span>
+            </el-menu-item>
+            <el-menu-item index="5">
+              <span slot="title">社团活动</span>
+            </el-menu-item>
+            <el-menu-item index="6">
+              <span slot="title">社团相册</span>
+            </el-menu-item>
+          </el-menu>
+        </div>
+        <div class="s-manageclub__box">
+          <basicinfo v-if="showPage === '1'"></basicinfo>
+          <members v-if="showPage === '2'"></members>
+          <apply v-if="showPage === '3'"></apply>
+          <architecture v-if="showPage === '4'"></architecture>
+          <activity v-if="showPage === '5'"></activity>
+          <album v-if="showPage === '6'"></album>
+        </div>
       </div>
     </div>
+    <s-image-upload
+      v-if="info.isUploadShow"
+      v-model="info.form.logo"
+      @close="closeUpload">
+    </s-image-upload>
   </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import Basicinfo from './page/basicinfo'
 import Members from './page/members'
 import Apply from './page/apply'
@@ -62,7 +70,15 @@ export default {
     Activity,
     Album
   },
+  computed: {
+    ...mapGetters({
+      info: 'viewsManageclubBasicinfo/info'
+    })
+  },
   methods: {
+    ...mapActions({
+      updateBasicinfo: 'viewsManageclubBasicinfo/updateBasicinfo'
+    }),
 
     /**
      * 菜单选择
@@ -70,6 +86,16 @@ export default {
     selectMenu (path) {
       let self = this
       self.showPage = path
+    },
+
+    /**
+     * 关闭上传组件
+     */
+    closeUpload (val) {
+      let self = this
+      self.updateBasicinfo({
+        isUploadShow: false
+      })
     }
   }
 }
