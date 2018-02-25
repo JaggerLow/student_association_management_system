@@ -2,12 +2,12 @@
   <div class="s-box__manage">
     <div class="s-box__manage--header">
       <span class="s-box__manage--title">社团相册</span>
-      <el-button
-        class="s-box__manage--button"
-        type="primary"
-        size="small">
-        上传图片
-      </el-button>
+      <el-upload
+        class="upload-demo s-box__manage--button"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :show-file-list="false">
+        <el-button size="small" type="primary">上传图片</el-button>
+      </el-upload>
     </div>
     <div class="s-album__main">
       <div

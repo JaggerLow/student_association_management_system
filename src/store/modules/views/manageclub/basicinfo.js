@@ -5,12 +5,18 @@ let state = {
       name: '',
       type: '',
       level: '',
-      scale: '1',
+      scale: '',
       introduction: '',
       announcement: '',
       logo: ''
     },
-    isUploadShow: false
+    isUploadShow: false,
+    mustProp: {
+      name: true,
+      type: true,
+      level: true
+    },
+    packageData: {}
   }
 }
 
