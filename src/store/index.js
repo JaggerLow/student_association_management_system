@@ -5,8 +5,10 @@ import getters from './getters'
 import mutations from './mutations'
 import actions from './actions'
 import sLogin from './modules/login'
+import viewsRegistered from './modules/views/registered'
 import viewsInfo from './modules/views/info'
 import viewsMyclubNewclub from './modules/views/myclub/newclub'
+import viewsMyclub from './modules/views/myclub'
 import viewsManageclubBasicinfo from './modules/views/manageclub/basicinfo'
 import viewsManageclubMembers from './modules/views/manageclub/members'
 import viewsManageclubApply from './modules/views/manageclub/apply'
@@ -21,7 +23,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     sLogin,
+    viewsRegistered,
     viewsInfo,
+    viewsMyclub,
     viewsMyclubNewclub,
     viewsManageclubBasicinfo,
     viewsManageclubMembers,

@@ -16,7 +16,7 @@
           <div class="s-header__main--navline" :class="[nav.focus? 's-header__main--navbottom' : '']"></div>
         </li>
       </ul>
-      <div class="s-header__main--box" style="float: right;">
+      <div v-if="isShowInfo" class="s-header__main--box" style="float: right;">
         <div class="s-header__main--icon"></div>
         <div class="s-header__main--info">
           <!-- <div>
@@ -46,7 +46,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      headerNav: 'headerNav'
+      headerNav: 'headerNav',
+      isShowInfo: 'isShowInfo'
     })
   },
   methods: {

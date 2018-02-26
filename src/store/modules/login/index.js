@@ -4,9 +4,13 @@ let state = {
     isShow: false,
     form: {
       email: '',
-      password: '',
-      remember: false
-    }
+      password: ''
+    },
+    mustProp: {
+      email: true,
+      password: true
+    },
+    packageData: {}
   }
 }
 

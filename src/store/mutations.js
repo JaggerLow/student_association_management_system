@@ -13,5 +13,12 @@ export default {
         item.focus = false
       }
     }
+  },
+
+  /**
+   * 设置右上角信息栏展示状态
+   */
+  [types.HEADER_SET_INFOSHOW] (state, payload) {
+    state.isShowInfo = payload
   }
 }

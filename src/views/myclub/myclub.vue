@@ -1,56 +1,129 @@
 <template>
-  <div class="s-box__context">
-    <div class="s-box__header">
-      我的社团
-      <el-button class="s-myclub__header--button" type="primary" @click.stop="openNewClub">创建社团</el-button>
-    </div>
-    <div class="s-myclub__main">
-      <div class="s-myclub__main--card">
-        <div
-          class="s-myclub__main--logo"
-          @click.stop="linkToClub">
-        </div>
-        <div class="s-myclub__main--info">
-          <div class="s-myclub__main--name">
-            <span @click.stop="linkToClub">社团名称</span>
-          </div>
-          <div class="s-myclub__main--introduction">
-            该社团暂无任何介绍~~
-          </div>
-        </div>
-        <div class="s-myclub__main--operate">
-          <div class="s-myclub__main--button button-bgcolor__normal">退出社团</div>
-          <div class="s-myclub__main--button button-bgcolor__normal" @click.stop="linkToManageclub">管理社团</div>
-          <div class="s-myclub__main--button button-bgcolor__red">解散社团</div>
-        </div>
+  <div>
+    <div class="s-box__context">
+      <div class="s-box__header">
+        我的社团
+        <el-button class="s-myclub__header--button" type="primary" @click.stop="openNewClub">创建社团</el-button>
       </div>
-      <s-pagefooter
-        v-if="count > 1"
-        v-model="page"
-        :count="count"
-        @changePage="changePage">
-      </s-pagefooter>
+      <div class="s-myclub__main">
+        <div
+          v-for="(club, index) in myclub.list"
+          class="s-myclub__main--card"
+          :key="index">
+          <div
+            class="s-myclub__main--logo"
+            @click.stop="linkToClub">
+          </div>
+          <div class="s-myclub__main--info">
+            <div class="s-myclub__main--name">
+              <span @click.stop="linkToClub">{{ club.name }}</span>
+            </div>
+            <div class="s-myclub__main--introduction">
+              {{ club.introduction }}
+            </div>
+          </div>
+          <div class="s-myclub__main--operate">
+            <div class="s-myclub__main--button button-bgcolor__normal" @click.stop="openLeaveClub(club.clubId, club.premit)">退出社团</div>
+            <div class="s-myclub__main--button button-bgcolor__normal" @click.stop="linkToManageclub">管理社团</div>
+            <div class="s-myclub__main--button button-bgcolor__red" @click.stop="openDissolveClub(club.clubId)">解散社团</div>
+          </div>
+        </div>
+        <s-pagefooter
+          v-if="myclub.count > 1"
+          v-model="myclub.page"
+          :count="myclub.count"
+          @changePage="changePage">
+        </s-pagefooter>
+      </div>
     </div>
+    <s-dialog-deletewarning
+      v-if="myclub.leaveWindow.isShow"
+      :title="'退出社团'"
+      :text="'您确定要退出社团么？'"
+      :deletetype="1"
+      :clubId="myclub.leaveWindow.clubId"
+      @close="closeLeaveClub">
+    </s-dialog-deletewarning>
+    <s-dialog-deletewarning
+      v-if="myclub.dissolveWindow.isShow"
+      :title="'解散社团'"
+      :text="'您确定要解散社团么？'"
+      :deletetype="1"
+      :clubId="myclub.dissolveWindow.clubId"
+      @close="closeDissolveClub">
+    </s-dialog-deletewarning>
   </div>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Myclub',
-  data () {
-    return {
-      page: 1,
-      count: 2
-    }
-  },
   computed: {
     ...mapGetters({
+      myclub: 'viewsMyclub/myclub'
     })
   },
   methods: {
     ...mapActions({
-      updateNewclubWindow: 'viewsMyclubNewclub/updateNewclubWindow'
+      updateNewclubWindow: 'viewsMyclubNewclub/updateNewclubWindow',
+      updateMyclub: 'viewsMyclub/updateMyclub'
     }),
+
+    /**
+     * 打开退出社团弹框
+     */
+    openLeaveClub (id, premit) {
+      let self = this
+      if (premit === '1') {
+        self.$message.error('最高管理员需要进行权限交接后才能退出社团！')
+      } else {
+        self.updateMyclub({
+          leaveWindow: {
+            isShow: true,
+            clubId: id
+          }
+        })
+      }
+    },
+
+    /**
+     * 关闭退出社团弹框
+     */
+    closeLeaveClub () {
+      let self = this
+      self.updateMyclub({
+        leaveWindow: {
+          isShow: false,
+          clubId: ''
+        }
+      })
+    },
+
+    /**
+     * 打开解散社团弹框
+     */
+    openDissolveClub (id) {
+      let self = this
+      self.updateMyclub({
+        dissolveWindow: {
+          isShow: true,
+          clubId: id
+        }
+      })
+    },
+
+    /**
+     * 关闭解散社团弹框
+     */
+    closeDissolveClub () {
+      let self = this
+      self.updateMyclub({
+        dissolveWindow: {
+          isShow: false,
+          clubId: ''
+        }
+      })
+    },
 
     /**
      * 打开创建社团弹窗

@@ -6,7 +6,13 @@ let state = {
       name: '',
       type: '',
       level: ''
-    }
+    },
+    mustProp: {
+      name: true,
+      type: true,
+      level: true
+    },
+    packageData: {}
   }
 }
 

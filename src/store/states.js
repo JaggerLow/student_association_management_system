@@ -1,4 +1,5 @@
 export default {
+  isShowInfo: true,
   headerNav: [{
     name: '首页',
     ename: 'home',

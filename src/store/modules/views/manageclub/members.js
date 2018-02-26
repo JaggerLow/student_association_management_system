@@ -11,6 +11,7 @@ let state = {
     table: [{
       name: '梁宇',
       clubDepartment: '宣传部',
+      userId: 1230456,
       position: '部长',
       department: '电子系',
       startYear: '2014',
@@ -44,6 +45,11 @@ let state = {
     isPermitShow: false,
     permitForm: {
       permit: ''
+    },
+    deleteMember: {
+      isShow: false,
+      clubId: '',
+      userId: ''
     }
   }
 }

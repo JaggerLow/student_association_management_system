@@ -6,20 +6,28 @@
       <div class="s-dialog__main">
         <div class="s-login__form">
           <el-input
+            :class="[!loginWindow.mustProp.email ? 's-input__empty' : '']"
+            @focus="clearCheck('email')"
             v-model="loginWindow.form.email"
-            placeholder="用户名">
+            placeholder="邮箱">
           </el-input>
+          <div v-if="!loginWindow.mustProp.email && loginWindow.form.email === ''" class="s-form__empty">请输入邮箱</div>
+          <div v-if="!loginWindow.mustProp.email && loginWindow.form.email !== ''" class="s-form__empty">请输入正确邮箱</div>
           <el-input
             v-model="loginWindow.form.password"
+            :class="[!loginWindow.mustProp.password ? 's-input__empty' : '']"
+            @focus="clearCheck('password')"
+            @keyup.native.enter="submitLogin"
             type="password"
             placeholder="密码"
             style="margin-top: 16px;">
           </el-input>
+          <div v-if="!loginWindow.mustProp.password" class="s-form__empty">请输入密码</div>
           <div class="s-login__choose">
-            <el-checkbox v-model="loginWindow.form.remember">记住账号</el-checkbox>
+            <span @click.stop="linkToRegistered">注册账号</span>
             <span class="s-login__choose--forget">忘记密码</span>
           </div>
-          <div class="s-login__bottom">登 录</div>
+          <div class="s-login__bottom" @click.stop="submitLogin">登 录</div>
         </div>
       </div>
       <div class="s-dialog__close fa fa-times" @click.stop="closeWindow"></div>
@@ -28,6 +36,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { cloneDeep } from 'lodash'
 export default {
   name: 'SDialogLogin',
   computed: {
@@ -41,18 +50,108 @@ export default {
     }),
 
     /**
-     * 关闭登录弹窗
+     * 初始化页面信息
      */
-    closeWindow () {
+    initData () {
       let self = this
       self.updateLoginWindow({
         isShow: false,
         form: {
           username: '',
-          password: '',
-          remember: false
-        }
+          password: ''
+        },
+        checkProp: {
+          email: true,
+          password: true
+        },
+        packageData: {}
       })
+    },
+
+    /**
+     * 清除校验结果
+     */
+    clearCheck (prop) {
+      let self = this
+      self.loginWindow.mustProp[prop] = true
+    },
+
+    /**
+     * 跳转注册页面
+     */
+    linkToRegistered () {
+      let self = this
+      self.initData()
+      self.$router.push('/registered')
+    },
+
+    /**
+     * 关闭登录弹窗
+     */
+    closeWindow () {
+      let self = this
+      self.initData()
+    },
+
+    /**
+     * 格式校验
+     */
+    checkFormat () {
+      let self = this
+      let reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+      let check = cloneDeep(self.loginWindow.mustProp)
+      for (let prop in check) {
+        if ([null, ''].indexOf(self.loginWindow.form[prop]) > -1) {
+          check[prop] = false
+        } else {
+          if (prop === 'email') {
+            if (!reg.test(self.loginWindow.form[prop])) {
+              check[prop] = false
+            } else {
+              check[prop] = true
+            }
+          } else {
+            check[prop] = true
+          }
+        }
+      }
+      self.updateLoginWindow({
+        mustProp: check
+      })
+    },
+
+    /**
+     * 上传数据打包
+     */
+    packageData () {
+      let self = this
+      let packageData = {}
+      let data = cloneDeep(self.loginWindow.form)
+      for (let prop in data) {
+        packageData[prop] = data[prop]
+      }
+      self.updateLoginWindow({
+        packageData: packageData
+      })
+    },
+
+    /**
+     * 登陆提交
+     */
+    submitLogin () {
+      let self = this
+      let isEmpty = false
+      self.checkFormat()
+      for (let item in self.loginWindow.mustProp) {
+        if (!self.loginWindow.mustProp[item]) {
+          isEmpty = true
+          break
+        }
+      }
+      if (!isEmpty) {
+        self.packageData()
+        console.log(self.loginWindow.packageData)
+      }
     }
   }
 }
@@ -67,13 +166,15 @@ export default {
     &__choose {
       margin-top: 16px;
       width: 100%;
-      &--forget {
+      span {
         cursor: pointer;
         color: $col-deeper-gray;
-        float: right;
         &:hover {
           color: $col-dark-blue;
         }
+      }
+      &--forget {
+        float: right;
       }
     }
     &__bottom {

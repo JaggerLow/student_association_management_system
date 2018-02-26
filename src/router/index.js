@@ -21,6 +21,11 @@ router.beforeEach(async (to, from, next) => {
   let nowPath = to.path
   nowPath = nowPath.split('/')
   nowPath = nowPath[1]
+  if (nowPath === 'registered') {
+    store.dispatch('setInfoShow', false)
+  } else {
+    store.dispatch('setInfoShow', true)
+  }
   store.dispatch('setHeaderNav', nowPath)
   next()
 })
