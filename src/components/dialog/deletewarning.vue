@@ -30,7 +30,7 @@ export default {
     },
     deletetype: Number,
     clubId: Number,
-    userId: Number
+    id: Number
   },
   methods: {
 

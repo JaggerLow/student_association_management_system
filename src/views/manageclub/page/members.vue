@@ -83,13 +83,13 @@
           <template slot-scope="scope">
             <div class="s-table__operate">
               <div>
-                <span class="s-table__operate--default" @click.stop="openClubDepart">部门</span>
+                <span class="s-table__operate--default" @click.stop="openClubDepart(scope.row)">部门</span>
               </div>
               <div>
-                <span class="s-table__operate--default" @click.stop="openClubPosition">职位</span>
+                <span class="s-table__operate--default" @click.stop="openClubPosition(scope.row)">职位</span>
               </div>
               <div>
-                <span class="s-table__operate--default" @click.stop="openClubPermit">权限</span>
+                <span class="s-table__operate--default" @click.stop="openClubPermit(scope.row)">权限</span>
               </div>
               <div>
                 <span class="s-table__operate--delete" @click.stop="openDeleteMember(scope.row)">删除</span>
@@ -108,10 +108,10 @@
     <s-dialog-deletewarning
       v-if="members.deleteMember.isShow"
       :title="'删除成员'"
-      :text="'您确定要删除改成员么？'"
+      :text="'您确定要删除该成员么？'"
       :deletetype="2"
       :clubId="members.deleteMember.clubId"
-      :userId="members.deleteMember.userId"
+      :id="members.deleteMember.userId"
       @close="closeDeleteMember">
     </s-dialog-deletewarning>
   </div>
@@ -161,30 +161,33 @@ export default {
     /**
      * 打开分配部门弹框
      */
-    openClubDepart () {
+    openClubDepart (row) {
       let self = this
       self.updateMembers({
-        isClubdepartShow: true
+        isClubdepartShow: true,
+        memberId: row.userId
       })
     },
 
     /**
      * 打开分配职位弹框
      */
-    openClubPosition () {
+    openClubPosition (row) {
       let self = this
       self.updateMembers({
-        isPositionShow: true
+        isPositionShow: true,
+        memberId: row.userId
       })
     },
 
     /**
      * 打开权限职位弹框
      */
-    openClubPermit () {
+    openClubPermit (row) {
       let self = this
       self.updateMembers({
-        isPermitShow: true
+        isPermitShow: true,
+        memberId: row.userId
       })
     },
 

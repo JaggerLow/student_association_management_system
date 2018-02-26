@@ -35,6 +35,7 @@ let state = {
       id: '2'
     }],
     isClubdepartShow: false,
+    memberId: '',
     clubdepartForm: {
       id: ''
     },

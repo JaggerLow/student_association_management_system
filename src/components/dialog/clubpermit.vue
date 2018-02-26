@@ -22,7 +22,7 @@
             </el-select>
           </el-form-item>
         </el-form>
-        <div class="s-clubpermit__button">确定</div>
+        <div class="s-clubpermit__button" @click.stop="submit">确定</div>
       </div>
       <div class="s-dialog__close fa fa-times" @click.stop="closeWindow"></div>
     </div>
@@ -43,12 +43,27 @@ export default {
     }),
 
     /**
+     * 部门提交
+     */
+    submit () {
+      let self = this
+      let packageData = {
+        clubId: 100001,
+        userId: self.members.memberId,
+        permit: self.members.permitForm.permit
+      }
+      console.log(packageData)
+      self.closeWindow()
+    },
+
+    /**
      * 关闭登录弹窗
      */
     closeWindow () {
       let self = this
       self.updateMembers({
         isPermitShow: false,
+        memberId: '',
         permitForm: {
           permit: ''
         }
