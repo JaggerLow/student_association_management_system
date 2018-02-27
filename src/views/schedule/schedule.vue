@@ -16,6 +16,6 @@ export default {
     line-height: 700px;
     height: 700px;
     text-align: center;
-    width: 100%;
+    min-width: 1200px;
   }
 </style>

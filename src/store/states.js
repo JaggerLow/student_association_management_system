@@ -1,5 +1,11 @@
 export default {
   isShowInfo: true,
+  userInfo: {
+    username: '凉瓜牛肉饭',
+    userId: 123456,
+    isMaster: true,
+    isLogin: true
+  },
   headerNav: [{
     name: '首页',
     ename: 'home',

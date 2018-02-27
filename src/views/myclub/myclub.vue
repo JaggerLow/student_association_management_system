@@ -8,24 +8,24 @@
       <div class="s-myclub__main">
         <div
           v-for="(club, index) in myclub.list"
-          class="s-myclub__main--card"
+          class="s-box__club--card"
           :key="index">
           <div
-            class="s-myclub__main--logo"
+            class="s-box__club--logo"
             @click.stop="linkToClub">
           </div>
-          <div class="s-myclub__main--info">
-            <div class="s-myclub__main--name">
+          <div class="s-box__club--info">
+            <div class="s-box__club--name">
               <span @click.stop="linkToClub">{{ club.name }}</span>
             </div>
-            <div class="s-myclub__main--introduction">
+            <div class="s-box__club--introduction">
               {{ club.introduction }}
             </div>
           </div>
-          <div class="s-myclub__main--operate">
-            <div class="s-myclub__main--button button-bgcolor__normal" @click.stop="openLeaveClub(club.clubId, club.premit)">退出社团</div>
-            <div class="s-myclub__main--button button-bgcolor__normal" @click.stop="linkToManageclub">管理社团</div>
-            <div class="s-myclub__main--button button-bgcolor__red" @click.stop="openDissolveClub(club.clubId)">解散社团</div>
+          <div class="s-box__club--operate">
+            <div class="s-box__club--button button-bgcolor__normal" @click.stop="openLeaveClub(club.clubId, club.premit)">退出社团</div>
+            <div class="s-box__club--button button-bgcolor__normal" @click.stop="linkToManageclub">管理社团</div>
+            <div class="s-box__club--button button-bgcolor__red" @click.stop="openDissolveClub(club.clubId)">解散社团</div>
           </div>
         </div>
         <s-pagefooter
@@ -173,69 +173,6 @@ export default {
       cursor: default;
       margin: 20px 0;
       min-height: 600px;
-      &--button {
-        border-radius: 4px;
-        color: $col-white;
-        cursor: pointer;
-        font-size: 14px;
-        height: 30px;
-        line-height: 30px;
-        margin: 10px auto;
-        text-align: center;
-        width: 100px;
-      }
-      &--card {
-        border: 1px solid $col-border;
-        border-radius: 4px;
-        height: 150px;
-        margin-bottom: 10px;
-        padding: 10px 25px;
-        width: 100%;
-      }
-      &--info {
-        float: left;
-        height: 100%;
-        margin-left: 30px;
-        width: 800px;
-      }
-      &--introduction {
-        color: $col-deeper-gray;
-        font-size: 16px;
-        height: 100px;
-        line-height: 34px;
-        overflow: hidden;
-        word-break: break-all;
-        width: 100%;
-      }
-      &--logo {
-        background: #999;
-        cursor: pointer;
-        float: left;
-        height: 100%;
-        width: 130px;
-      }
-      &--name {
-        color: $col-deep-black;
-        font-size: 22px;
-        height: 30px;
-        line-height: 30px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 100%;
-        span {
-          cursor: pointer;
-          &:hover {
-            color: $col-dark-blue;
-          }
-        }
-      }
-      &--operate {
-        float: left;
-        margin-left: 10px;
-        height: 100%;
-        width: 170px;
-      }
     }
   }
 </style>

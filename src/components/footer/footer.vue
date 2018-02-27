@@ -33,7 +33,8 @@ export default {
     cursor: default;
     font-size: 12px;
     height: 300px;
-    width: 100%;
+    margin: 0 auto;
+    min-width: 1200px;
     &__bottom {
       color: rgba(255,255,255,.72);
       font-size: 14px;

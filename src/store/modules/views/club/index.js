@@ -33,12 +33,12 @@ let state = {
       memberList: [{
         image: '',
         username: '凉瓜牛肉饭',
-        userId: ''
+        userId: 1234568
       },
       {
         image: '',
         username: 'cut picture boy',
-        userId: ''
+        userId: 1234586
       }]
     }
   }

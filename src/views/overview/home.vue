@@ -26,21 +26,21 @@ export default {
     &__carousel {
       background: #ddd;
       height: 640px;
-      width: 100%;
+      min-width: 1200px;
     }
     &__news {
       background: #999;
       line-height: 500px;
       height: 500px;
       text-align: center;
-      width: 100%;
+      min-width: 1200px;
     }
     &__about {
       background: #666;
       line-height: 500px;
       height: 500px;
       text-align: center;
-      width: 100%;
+      min-width: 1200px;
     }
   }
   .el-carousel__item h3 {

@@ -37,6 +37,7 @@ export default {
   html,
   body {
     height: 100%;
+    min-width: 1200px;
   }
   body {
     -webkit-font-smoothing: antialiased;
@@ -48,5 +49,6 @@ export default {
   }
   .s-wrapper {
     padding-top: 60px;
+    min-width: 1200px;
   }
 </style>

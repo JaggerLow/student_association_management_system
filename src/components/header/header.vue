@@ -19,11 +19,11 @@
       <div v-if="isShowInfo" class="s-header__main--box" style="float: right;">
         <div class="s-header__main--icon"></div>
         <div class="s-header__main--info">
-          <!-- <div>
+          <div v-if="!userInfo.isLogin">
             <span @click.stop="login">登录</span> / <span @click.stop="linkTo('/registered')">注册</span>
-          </div> -->
-          <div class="s-header__operate">
-            <p>凉瓜牛肉饭</p>
+          </div>
+          <div v-if="userInfo.isLogin" class="s-header__operate">
+            <p>{{ userInfo.username }}</p>
             <div>
               <ul>
                 <li><span @click.stop="linkTo('/info')">个人信息</span></li>
@@ -47,6 +47,7 @@ export default {
   computed: {
     ...mapGetters({
       headerNav: 'headerNav',
+      userInfo: 'userInfo',
       isShowInfo: 'isShowInfo'
     })
   },
