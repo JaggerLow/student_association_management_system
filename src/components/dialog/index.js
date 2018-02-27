@@ -6,6 +6,7 @@ import SDialogClubdepartment from './clubdepartment'
 import SDialogClubposition from './clubposition'
 import SDialogClubpermit from './clubpermit'
 import SDialogDeletewarning from './deletewarning'
+import SDialogUserinfo from './userinfo'
 
 let dialog = {}
 dialog.install = Vue => {
@@ -17,6 +18,7 @@ dialog.install = Vue => {
   Vue.component(SDialogClubposition.name, SDialogClubposition)
   Vue.component(SDialogClubpermit.name, SDialogClubpermit)
   Vue.component(SDialogDeletewarning.name, SDialogDeletewarning)
+  Vue.component(SDialogUserinfo.name, SDialogUserinfo)
 }
 
 export default dialog

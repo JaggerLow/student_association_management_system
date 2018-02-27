@@ -202,7 +202,8 @@ export default {
         color: $col-deeper-gray;
         font-size: 16px;
         height: 100px;
-        line-height: 30px;
+        line-height: 34px;
+        overflow: hidden;
         word-break: break-all;
         width: 100%;
       }
@@ -216,8 +217,8 @@ export default {
       &--name {
         color: $col-deep-black;
         font-size: 22px;
-        height: 50px;
-        line-height: 50px;
+        height: 30px;
+        line-height: 30px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;

@@ -7,6 +7,7 @@ let state = {
     table: [{
       name: '梁宇',
       gender: '男',
+      userId: 123456,
       department: '电子系',
       startYear: '2014',
       phone: '13622323592',

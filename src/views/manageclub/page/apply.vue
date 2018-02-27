@@ -58,13 +58,13 @@
         <template slot-scope="scope">
           <div class="s-table__operate">
             <div>
-              <span class="s-table__operate--agree">同意</span>
+              <span class="s-table__operate--agree" @click.stop="operateApply(scope.row, true)">同意</span>
             </div>
             <div>
-              <span class="s-table__operate--delete">拒绝</span>
+              <span class="s-table__operate--delete" @click.stop="operateApply(scope.row, false)">拒绝</span>
             </div>
             <div>
-              <span class="s-table__operate--default">查看</span>
+              <span class="s-table__operate--default" @click.stop="applyDetail(scope.row)">查看</span>
             </div>
           </div>
         </template>
@@ -89,7 +89,31 @@ export default {
   },
   methods: {
     ...mapActions({
+      updateUserinfo: 'sUserinfo/updateUserinfo'
     }),
+
+    /**
+     * 操作
+     */
+    operateApply (row, operate) {
+      let packageData = {
+        clubId: 100001,
+        userId: row.userId,
+        isAgree: operate
+      }
+      console.log(packageData)
+    },
+
+    /**
+     * 查看申请人个人信息
+     */
+    applyDetail (row) {
+      let self = this
+      self.updateUserinfo({
+        isShow: true,
+        userId: row.userId
+      })
+    },
 
     /**
      * 表单筛选

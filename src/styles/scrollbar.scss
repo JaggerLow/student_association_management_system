@@ -1,0 +1,12 @@
+@import './core/var';
+.s-userinfo__info--textarea {
+  float: left;
+  line-height: 18px;
+  max-height: 90px;
+  padding: 6px 0 0 0;
+  width: 320px;
+  word-break: break-all;
+  .s-scrollbar__wrap {
+    max-height: 90px;
+  }
+}

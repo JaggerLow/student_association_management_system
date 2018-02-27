@@ -15,6 +15,7 @@
       <s-dialog-clubdepartment></s-dialog-clubdepartment>
       <s-dialog-clubposition></s-dialog-clubposition>
       <s-dialog-clubpermit></s-dialog-clubpermit>
+      <s-dialog-userinfo></s-dialog-userinfo>
     </div>
   </div>
 </template>
