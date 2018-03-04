@@ -27,8 +27,8 @@
           </el-input>
         </el-form-item>
         <el-form-item label="性别">
-          <el-radio v-model="info.form.gender" label="0">男</el-radio>
-          <el-radio v-model="info.form.gender" label="1">女</el-radio>
+          <el-radio v-model="info.form.gender" :label="0">男</el-radio>
+          <el-radio v-model="info.form.gender" :label="1">女</el-radio>
         </el-form-item>
         <el-form-item label="出生日期">
           <el-date-picker
@@ -113,7 +113,7 @@
         </el-form-item>
         <el-form-item label="">
           <el-button type="primary" @click.stop="updateForm">保 存</el-button>
-          <el-button>重置信息</el-button>
+          <el-button @click.stop="getInfo">重置信息</el-button>
         </el-form-item>
       </el-form>
       <div class="s-info__avatar">
@@ -123,6 +123,7 @@
     </div>
     <s-image-upload
       v-if="info.isUploadShow"
+      action="/uploadImage.do"
       v-model="info.form.image"
       @close="closeUpload"
       title="个人头像">
@@ -141,7 +142,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateInfo: 'viewsInfo/updateInfo'
+      updateInfo: 'viewsInfo/updateInfo',
+      getInfo: 'viewsInfo/getInfo'
     }),
 
     /**
@@ -153,7 +155,7 @@ export default {
         form: {
           username: '',
           actualName: '',
-          gender: '0',
+          gender: 0,
           birthday: '',
           nativePlace: '',
           department: '',
@@ -193,8 +195,8 @@ export default {
       let data = cloneDeep(self.info.form)
       for (let prop in data) {
         if (prop !== 'email') {
-          if (data[prop] === null) {
-            packageData[prop] = ''
+          if (data[prop] === null || data[prop] === '') {
+            packageData[prop] = null
           } else {
             packageData[prop] = data[prop]
           }
@@ -226,7 +228,7 @@ export default {
     /**
      * 保存个人信息
      */
-    updateForm () {
+    async updateForm () {
       let self = this
       let isEmpty = false
       self.checkFormat()
@@ -238,7 +240,17 @@ export default {
       }
       if (!isEmpty) {
         self.packageData()
-        console.log(self.info.packageData)
+        let data = await self.$wPost('/deal/updateUser.do', self.info.packageData)
+        if (data.data) {
+          self.$message({
+            message: '修改成功！',
+            type: 'success'
+          })
+          self.updateInfo({
+            packageData: {}
+          })
+          self.getInfo()
+        }
       } else {
         self.$message.error('请完善必填信息')
       }
@@ -265,6 +277,8 @@ export default {
     }
   },
   mounted () {
+    let self = this
+    self.getInfo()
   },
   beforeDestroy () {
     let self = this

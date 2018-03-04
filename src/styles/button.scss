@@ -1,4 +1,9 @@
 @import './core/var';
+.el-button:focus {
+  color: #606266;
+  background: $col-white;
+  border-color: #dcdfe6;
+}
 .button-bgcolor {
   &__normal {
     background: $col-dark-blue;
@@ -14,11 +19,11 @@
   }
 }
 .el-button--primary {
-  color: #fff;
-  background-color: $col-dark-blue;
-  border-color: $col-dark-blue;
+  color: #fff !important;
+  background-color: $col-dark-blue !important;
+  border-color: $col-dark-blue !important;
   &:hover {
-    background: $col-normal-blue;
-    border-color: $col-normal-blue;
+    background: $col-normal-blue !important;
+    border-color: $col-normal-blue !important;
   }
 }
