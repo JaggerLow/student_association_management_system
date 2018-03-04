@@ -29,7 +29,7 @@
                 <li><span @click.stop="linkTo('/info')">个人信息</span></li>
                 <li><span @click.stop="linkTo('/myclub')">我的社团</span></li>
                 <li><span>修改密码</span></li>
-                <li><span>退出</span></li>
+                <li><span @click.stop="loginOut()">退出登录</span></li>
               </ul>
             </div>
           </div>
@@ -54,6 +54,7 @@ export default {
   methods: {
     ...mapActions({
       setHeaderNav: 'setHeaderNav',
+      updateUserInfo: 'updateUserInfo',
       updateLoginWindow: 'sLogin/updateLoginWindow'
     }),
 
@@ -73,6 +74,28 @@ export default {
     linkTo (url) {
       let self = this
       self.$router.push(url)
+    },
+
+    /**
+     * 退出登录
+     */
+    async loginOut () {
+      let self = this
+      let data = await self.$wGet('/logout.do')
+      if (data.data) {
+        let userInfo = {
+          username: '',
+          userId: '',
+          isMaster: false,
+          isLogin: false
+        }
+        self.updateUserInfo(userInfo)
+        self.$message({
+          message: '退出登录',
+          type: 'success'
+        })
+        self.$router.push('/home')
+      }
     }
   },
   async mounted () {

@@ -57,9 +57,15 @@
             placeholder="验证码">
           </el-input>
           <div
+            v-if="!registered.waitCode"
             class="s-registered__codebutton"
             @click.stop="getCode">
             获取验证码
+          </div>
+          <div
+            v-if="registered.waitCode"
+            class="s-registered__codebutton s-registered__waitcode">
+            {{ registered.waitTime }} 获取验证码
           </div>
           <div v-if="!registered.mustProp.code && registered.form.code === ''" class="s-form__empty">请填写 验证码</div>
           <div v-if="!registered.mustProp.code && registered.form.code !== ''" class="s-form__empty">验证码错误</div>
@@ -82,6 +88,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      updateUserInfo: 'updateUserInfo',
       updateRegistered: 'viewsRegistered/updateRegistered'
     }),
 
@@ -105,7 +112,9 @@ export default {
           checkpassword: true,
           code: true
         },
-        packageData: {}
+        packageData: {},
+        waitCode: false,
+        waitTime: 60
       })
     },
 
@@ -141,14 +150,18 @@ export default {
               check[prop] = true
             }
           } else if (prop === 'code') {
-            let data = {
-              code: 200,
-              data: true
-            }
-            if (data.data) {
-              check[prop] = true
-            } else {
-              check[prop] = false
+            if (self.registered.form.email !== '' && reg.test(self.registered.form.email)) {
+              let checkEmail = {
+                email: self.registered.form.email,
+                code: self.registered.form.code,
+                type: 1
+              }
+              let data = await self.$wPost('/checkCode.do', checkEmail)
+              if (data.data === 1) {
+                check[prop] = true
+              } else {
+                check[prop] = false
+              }
             }
           } else {
             check[prop] = true
@@ -163,7 +176,7 @@ export default {
     /**
      * 获取验证码
      */
-    getCode () {
+    async getCode () {
       let self = this
       let reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
       if ([null, ''].indexOf(self.registered.form.email) > -1) {
@@ -171,8 +184,41 @@ export default {
       } else if (!reg.test(self.registered.form.email)) {
         self.$message.error('请输入正确的邮箱地址')
       } else {
-        console.log(1)
+        let data = await self.$wPost('/sendRegisterCode.do', {email: self.registered.form.email})
+        if (data.data) {
+          self.$message({
+            message: '验证码已发送，请在30分钟内进行验证！',
+            type: 'success'
+          })
+          self.updateRegistered({
+            waitCode: true
+          })
+          self.setWaitTime()
+        }
       }
+    },
+
+    /**
+     * 获取验证码时间倒数
+     */
+    setWaitTime () {
+      let self = this
+      let timer = setTimeout(() => {
+        if (self.registered.waitTime === 0) {
+          clearTimeout(timer)
+          self.updateRegistered({
+            waitCode: false,
+            waitTime: 60
+          })
+        } else {
+          let waitTime = cloneDeep(self.registered.waitTime)
+          waitTime--
+          self.updateRegistered({
+            waitTime: waitTime
+          })
+          self.setWaitTime()
+        }
+      }, 1000)
     },
 
     /**
@@ -195,7 +241,7 @@ export default {
     /**
      * 用户注册
      */
-    submitRegistered () {
+    async submitRegistered () {
       let self = this
       let isEmpty = false
       self.checkFormat()
@@ -207,7 +253,21 @@ export default {
       }
       if (!isEmpty) {
         self.packageData()
-        console.log(self.registered.packageData)
+        let data = await self.$wPost('/registerByCode.do', self.registered.packageData)
+        if (data.data) {
+          let userInfo = {
+            username: data.data.username,
+            userId: data.data.userId,
+            isMaster: data.data.isMaster,
+            isLogin: true
+          }
+          self.$message({
+            message: '注册成功！',
+            type: 'success'
+          })
+          self.updateUserInfo(userInfo)
+          self.$router.push('/home')
+        }
       } else {
         self.$message.error('请完善注册信息')
       }
@@ -281,6 +341,13 @@ export default {
       &:hover {
         border-color: $col-dark-blue;
         color: $col-dark-blue;
+      }
+    }
+    &__waitcode {
+      cursor: default !important;
+      &:hover {
+        border-color: $col-border !important;
+        color: $col-deepest-gray !important;
       }
     }
     &__return {

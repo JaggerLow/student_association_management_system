@@ -6,13 +6,13 @@
       <div class="s-dialog__main">
         <div class="s-login__form">
           <el-input
-            :class="[!loginWindow.mustProp.email ? 's-input__empty' : '']"
-            @focus="clearCheck('email')"
-            v-model="loginWindow.form.email"
+            :class="[!loginWindow.mustProp.account ? 's-input__empty' : '']"
+            @focus="clearCheck('account')"
+            v-model="loginWindow.form.account"
             placeholder="邮箱">
           </el-input>
-          <div v-if="!loginWindow.mustProp.email && loginWindow.form.email === ''" class="s-form__empty">请输入邮箱</div>
-          <div v-if="!loginWindow.mustProp.email && loginWindow.form.email !== ''" class="s-form__empty">请输入正确邮箱</div>
+          <div v-if="!loginWindow.mustProp.account && loginWindow.form.account === ''" class="s-form__empty">请输入邮箱</div>
+          <div v-if="!loginWindow.mustProp.account && loginWindow.form.account !== ''" class="s-form__empty">请输入正确邮箱</div>
           <el-input
             v-model="loginWindow.form.password"
             :class="[!loginWindow.mustProp.password ? 's-input__empty' : '']"
@@ -46,6 +46,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      updateUserInfo: 'updateUserInfo',
       updateLoginWindow: 'sLogin/updateLoginWindow'
     }),
 
@@ -57,11 +58,11 @@ export default {
       self.updateLoginWindow({
         isShow: false,
         form: {
-          username: '',
+          account: '',
           password: ''
         },
         checkProp: {
-          email: true,
+          account: true,
           password: true
         },
         packageData: {}
@@ -104,7 +105,7 @@ export default {
         if ([null, ''].indexOf(self.loginWindow.form[prop]) > -1) {
           check[prop] = false
         } else {
-          if (prop === 'email') {
+          if (prop === 'account') {
             if (!reg.test(self.loginWindow.form[prop])) {
               check[prop] = false
             } else {
@@ -138,7 +139,7 @@ export default {
     /**
      * 登陆提交
      */
-    submitLogin () {
+    async submitLogin () {
       let self = this
       let isEmpty = false
       self.checkFormat()
@@ -150,7 +151,23 @@ export default {
       }
       if (!isEmpty) {
         self.packageData()
-        console.log(self.loginWindow.packageData)
+        let data = await self.$wPost('/login.do', self.loginWindow.packageData)
+        if (data.data) {
+          let userInfo = {
+            username: data.data.username,
+            userId: data.data.userId,
+            isMaster: data.data.isMaster,
+            isLogin: true
+          }
+          self.$message({
+            message: '登陆成功！',
+            type: 'success'
+          })
+          self.updateUserInfo(userInfo)
+          self.initData()
+        } else {
+          self.$message.error('登录失败，账号或者密码错误！')
+        }
       }
     }
   }

@@ -15,7 +15,9 @@ let state = {
       checkpassword: true,
       code: true
     },
-    packageData: {}
+    packageData: {},
+    waitCode: false,
+    waitTime: 60
   }
 }
 

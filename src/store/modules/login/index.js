@@ -3,11 +3,11 @@ let state = {
   loginWindow: {
     isShow: false,
     form: {
-      email: '',
+      account: '',
       password: ''
     },
     mustProp: {
-      email: true,
+      account: true,
       password: true
     },
     packageData: {}

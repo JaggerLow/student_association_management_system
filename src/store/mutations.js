@@ -20,5 +20,14 @@ export default {
    */
   [types.HEADER_SET_INFOSHOW] (state, payload) {
     state.isShowInfo = payload
+  },
+
+  /**
+   * 更新登录信息状态
+   */
+  [types.HEADER_SET_USERINFO] (state, payload) {
+    for (let prop in payload) {
+      state.userInfo[prop] = payload[prop]
+    }
   }
 }
