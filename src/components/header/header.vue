@@ -4,7 +4,7 @@
       <div
         class="s-header__main--box"
         @click.stop="linkTo('/home')">
-        <div style="height: 100%; width: 100%; background: #ddd;"></div>
+        <div class="s-header__main--logo"></div>
       </div>
       <ul class="s-header__main--nav">
         <li

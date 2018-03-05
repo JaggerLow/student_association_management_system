@@ -25,7 +25,7 @@
           <div v-if="!loginWindow.mustProp.password" class="s-form__empty">请输入密码</div>
           <div class="s-login__choose">
             <span @click.stop="linkToRegistered">注册账号</span>
-            <span class="s-login__choose--forget">忘记密码</span>
+            <span class="s-login__choose--forget" @click.stop="linkToForgetpwd">忘记密码</span>
           </div>
           <div class="s-login__bottom" @click.stop="submitLogin">登 录</div>
         </div>
@@ -84,6 +84,15 @@ export default {
       let self = this
       self.initData()
       self.$router.push('/registered')
+    },
+
+    /**
+     * 跳转注册页面
+     */
+    linkToForgetpwd () {
+      let self = this
+      self.initData()
+      self.$router.push('/forgetpwd')
     },
 
     /**

@@ -2,7 +2,11 @@
   <div class="s-footer">
     <div class="s-footer__box">
       <div class="s-footer__left">
-        <div class="s-footer__icon"></div>
+        <div class="s-footer__icon">
+          <div
+            class="s-footer__icon--box">
+          </div>
+        </div>
         <p>课题名称：学生社团管理系统</p>
         <p>技术栈：基于Vue2 + Java + MySQL</p>
         <p>github：<a href="https://github.com/ly645091114" target="_blank">github.com/ly645091114</a></p>
@@ -72,6 +76,11 @@ export default {
       margin-bottom: 20px;
       height: 60px;
       width: 140px;
+      &--box {
+        background: url('../../assets/white_logo.jpg') center center no-repeat;
+        height: 100%;
+        width: 100%;
+      }
     }
     &__left {
       flex: 3;

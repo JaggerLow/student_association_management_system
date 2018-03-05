@@ -293,8 +293,9 @@ export default {
   @import "../../styles/core/var";
 
   .s-registered {
-    background: #999;
+    background: url('../../assets/registered_bg.jpg') center center no-repeat;
     height: 900px;
+    overflow: hidden;
     width: 100%;
     &__bottom {
       background: $col-dark-blue;

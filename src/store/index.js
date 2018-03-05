@@ -7,6 +7,7 @@ import actions from './actions'
 import sLogin from './modules/login'
 import sUserinfo from './modules/userinfo'
 import viewsDynamic from './modules/views/dynamic'
+import viewsForgetpwd from './modules/views/forgetpwd'
 import viewsRegistered from './modules/views/registered'
 import viewsInfo from './modules/views/info'
 import viewsMyclubNewclub from './modules/views/myclub/newclub'
@@ -28,6 +29,7 @@ export default new Vuex.Store({
     sUserinfo,
     viewsDynamic,
     viewsRegistered,
+    viewsForgetpwd,
     viewsInfo,
     viewsMyclub,
     viewsMyclubNewclub,

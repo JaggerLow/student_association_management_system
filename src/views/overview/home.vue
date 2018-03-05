@@ -2,17 +2,27 @@
   <div class="s-home">
     <div class="s-box">
       <div class="s-home__carousel">
-        <el-carousel height="640px">
-          <el-carousel-item v-for="item in 4" :key="item">
-            <h3>{{ item }} 活动信息</h3>
-          </el-carousel-item>
-        </el-carousel>
+        <div class="s-home__box">
+          <el-carousel height="640px">
+            <el-carousel-item v-for="item in 4" :key="item">
+              <h3>{{ item }} 活动信息</h3>
+            </el-carousel-item>
+          </el-carousel>
+        </div>
       </div>
       <div class="s-home__news">
-        公告/新闻/活动
+        <div class="s-home__box">
+          公告/新闻/活动
+        </div>
       </div>
       <div class="s-home__about">
-        功能介绍
+        <div class="s-home__box">
+          <div class="s-box__header">
+            功能介绍
+          </div>
+          <div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -22,24 +32,25 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+  @import "../../styles/core/var";
   .s-home {
+    &__box {
+      margin: 0 auto;
+      width: 1200px;
+    }
     &__carousel {
-      background: #ddd;
+      background: $col-lighter-blue;
       height: 640px;
       min-width: 1200px;
     }
     &__news {
-      background: #999;
       line-height: 500px;
       height: 500px;
       text-align: center;
       min-width: 1200px;
     }
     &__about {
-      background: #666;
-      line-height: 500px;
       height: 500px;
-      text-align: center;
       min-width: 1200px;
     }
   }

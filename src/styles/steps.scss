@@ -1,0 +1,9 @@
+@import './core/var';
+.el-step__head.is-process {
+  border-color: $col-dark-blue;
+}
+.el-step__title.is-process,
+.el-step__description.is-process,
+.el-step__head.is-process {
+  color: $col-dark-blue;
+}

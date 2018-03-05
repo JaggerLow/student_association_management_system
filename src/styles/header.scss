@@ -1,7 +1,7 @@
 @import './core/var';
 
 .s-header {
-  background: rgba(255,255,255,.95);
+  background: rgb(255,255,255);
   border-bottom: 1px solid #ededed;
   box-shadow: 0 1px 2px 0 #ccc;
   cursor: default;
@@ -23,6 +23,11 @@
     }
     &--activecolor {
       color: $col-dark-blue !important;
+    }
+    &--logo {
+      background: url('../assets/blue_logo.jpg') center center no-repeat;
+      height: 100%;
+      width: 100%;
     }
     &--nav {
       align-items: center;
