@@ -244,7 +244,7 @@ export default {
     async submitRegistered () {
       let self = this
       let isEmpty = false
-      self.checkFormat()
+      await self.checkFormat()
       for (let item in self.registered.mustProp) {
         if (!self.registered.mustProp[item]) {
           isEmpty = true

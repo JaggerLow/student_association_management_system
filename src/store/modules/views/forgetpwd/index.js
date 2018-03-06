@@ -7,6 +7,18 @@ let state = {
     emailForm: {
       email: '',
       code: ''
+    },
+    checkEForm: {
+      email: true,
+      code: true
+    },
+    newpassword: {
+      password: '',
+      checkpassword: ''
+    },
+    checkNPassword: {
+      password: true,
+      checkpassword: true
     }
   }
 }

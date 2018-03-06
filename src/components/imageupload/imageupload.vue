@@ -137,7 +137,7 @@ export default {
           window.clearInterval(timer)
           self.cropperConfig.full = false
           let fmData = new FormData()
-          fmData.append('dataFile', data2blob(self.apiImg, mimes['png']), 'image.png')
+          fmData.append('uploadFile', data2blob(self.apiImg, mimes['png']), 'image.png')
           self.getApi(fmData)
         }
       }, 500)
