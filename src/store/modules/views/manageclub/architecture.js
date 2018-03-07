@@ -1,46 +1,10 @@
 import * as types from '@/store/mutation-types'
+import Vue from 'vue'
 let state = {
   architecture: {
-    clubDepartment: [{
-      name: '宣传部',
-      id: 1
-    },
-    {
-      name: '技术部',
-      id: 2
-    },
-    {
-      name: '秘书处',
-      id: 3
-    }],
-    position: [{
-      name: '主席',
-      id: 1
-    },
-    {
-      name: '副主席',
-      id: 2
-    },
-    {
-      name: '会长',
-      id: 3
-    },
-    {
-      name: '副会长',
-      id: 4
-    },
-    {
-      name: '部长',
-      id: 5
-    },
-    {
-      name: '副部长',
-      id: 6
-    },
-    {
-      name: '干事',
-      id: 7
-    }],
+    clubId: '',
+    clubDepartment: [],
+    position: [],
     isDepartShow: false,
     departForm: {
       name: ''
@@ -75,6 +39,26 @@ let actions = {
    */
   updateArchitecture ({ commit }, payload) {
     commit(types.ARCHITECTURE_SET_ARCHITECTURE, payload)
+  },
+
+  /**
+   * 获取部门架构列表
+   */
+  async getClubDepartment ({ commit, state }) {
+    let data = await Vue.wPost('/deal/club/listDepartment.do', {clubId: state.architecture.clubId})
+    commit(types.ARCHITECTURE_SET_ARCHITECTURE, {
+      clubDepartment: data.data.records
+    })
+  },
+
+  /**
+   * 获取职位架构列表
+   */
+  async getPosition ({ commit, state }) {
+    let data = await Vue.wPost('/deal/club/listPosition.do', {clubId: state.architecture.clubId})
+    commit(types.ARCHITECTURE_SET_ARCHITECTURE, {
+      position: data.data.records
+    })
   }
 }
 

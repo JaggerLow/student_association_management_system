@@ -1,5 +1,7 @@
 <template>
-  <div class="s-box__manage">
+  <div
+    v-loading="info.loading"
+    class="s-box__manage">
     <el-form
       ref="form"
       class="s-form s-basicinfo__form"
@@ -72,7 +74,7 @@
       </el-form-item>
       <el-form-item label="">
         <el-button type="primary" @click.stop="updateForm">保 存</el-button>
-        <el-button>重置信息</el-button>
+        <el-button @click.stop="getBasicinfo">重置信息</el-button>
       </el-form-item>
     </el-form>
     <div class="s-basicinfo__logo">
@@ -95,7 +97,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateBasicinfo: 'viewsManageclubBasicinfo/updateBasicinfo'
+      updateBasicinfo: 'viewsManageclubBasicinfo/updateBasicinfo',
+      getBasicinfo: 'viewsManageclubBasicinfo/getBasicinfo'
     }),
 
     /**
@@ -104,6 +107,8 @@ export default {
     initData () {
       let self = this
       self.updateBasicinfo({
+        clubId: '',
+        loading: false,
         form: {
           name: '',
           type: '',
@@ -139,6 +144,7 @@ export default {
           }
         }
       }
+      packageData.clubId = self.info.clubId
       self.updateBasicinfo({
         packageData: packageData
       })
@@ -173,7 +179,7 @@ export default {
     /**
      * 保存社团基本信息
      */
-    updateForm () {
+    async updateForm () {
       let self = this
       let isEmpty = false
       self.checkFormat()
@@ -185,7 +191,17 @@ export default {
       }
       if (!isEmpty) {
         self.packageData()
-        console.log(self.info.packageData)
+        let data = await self.$wPost('/deal/club/submit.do', self.info.packageData)
+        if (data.data) {
+          self.$message({
+            message: '修改成功！',
+            type: 'success'
+          })
+          self.updateBasicinfo({
+            packageData: {}
+          })
+          self.getBasicinfo()
+        }
       } else {
         self.$message.error('请完善必填信息')
       }
@@ -202,6 +218,12 @@ export default {
     }
   },
   mounted () {
+    let self = this
+    let clubId = Number(self.$route.query.id)
+    self.updateBasicinfo({
+      clubId: clubId
+    })
+    self.getBasicinfo()
   },
   beforeDestroy () {
     let self = this

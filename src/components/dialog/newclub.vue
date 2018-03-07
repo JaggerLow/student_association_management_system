@@ -73,7 +73,9 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateNewclubWindow: 'viewsMyclubNewclub/updateNewclubWindow'
+      updateNewclubWindow: 'viewsMyclubNewclub/updateNewclubWindow',
+      updateMyclub: 'viewsMyclub/updateMyclub',
+      getClubList: 'viewsMyclub/getClubList'
     }),
 
     /**
@@ -149,7 +151,7 @@ export default {
     /**
      * 创建社团
      */
-    createClub () {
+    async createClub () {
       let self = this
       let isEmpty = false
       self.checkFormat()
@@ -161,7 +163,18 @@ export default {
       }
       if (!isEmpty) {
         self.packageData()
-        console.log(self.newclubWindow.packageData)
+        let data = await self.$wPost('/deal/club/submit.do', self.newclubWindow.packageData)
+        if (data.data) {
+          self.$message({
+            message: '创建成功',
+            type: 'success'
+          })
+          self.updateMyclub({
+            page: 1
+          })
+          self.getClubList()
+          self.closeWindow()
+        }
       }
     }
   }

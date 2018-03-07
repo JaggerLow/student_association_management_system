@@ -1,5 +1,8 @@
 import * as types from '@/store/mutation-types'
+import Vue from 'vue'
 let state = {
+  clubId: '',
+  loading: false,
   info: {
     form: {
       name: '',
@@ -43,6 +46,30 @@ let actions = {
    */
   updateBasicinfo ({ commit }, payload) {
     commit(types.BASICINFO_SET_BASICINFO, payload)
+  },
+
+  /**
+   * 获取社团的基本信息
+   */
+  async getBasicinfo ({ commit, state }) {
+    commit(types.BASICINFO_SET_BASICINFO, {
+      loading: true
+    })
+    let data = await Vue.wPost('/deal/club/get.do', {clubId: state.info.clubId})
+    let infoData = {}
+    for (let prop in data.data) {
+      if (prop !== 'clubId') {
+        if (data.data[prop] === null) {
+          infoData[prop] = ''
+        } else {
+          infoData[prop] = data.data[prop]
+        }
+      }
+    }
+    commit(types.BASICINFO_SET_BASICINFO, {
+      form: infoData,
+      loading: false
+    })
   }
 }
 

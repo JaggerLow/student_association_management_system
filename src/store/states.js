@@ -1,8 +1,8 @@
 export default {
   isShowInfo: true,
   userInfo: {
-    username: '凉瓜牛肉饭',
-    userId: '123456',
+    username: '',
+    userId: '',
     isMaster: false,
     isLogin: false
   },
@@ -32,39 +32,39 @@ export default {
   }],
   clubType: [{
     label: '学术类',
-    value: '0'
+    value: 0
   },
   {
     label: '实践类',
-    value: '1'
+    value: 1
   },
   {
     label: '体育类',
-    value: '2'
+    value: 2
   },
   {
     label: '艺术类',
-    value: '3'
+    value: 3
   },
   {
     label: '团学组织',
-    value: '4'
+    value: 4
   },
   {
     label: '其他',
-    value: '5'
+    value: 5
   }],
   clubLevel: [{
     label: '校级组织',
-    value: '0'
+    value: 0
   },
   {
     label: '院级组织',
-    value: '1'
+    value: 1
   },
   {
     label: '兴趣社团',
-    value: '2'
+    value: 2
   }],
   activityType: [{
     label: '招新',

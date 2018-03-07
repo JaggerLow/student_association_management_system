@@ -30,16 +30,28 @@ export default {
     },
     deletetype: Number,
     clubId: Number,
-    id: Number
+    id: Number,
+    action: String
   },
   methods: {
 
     /**
      * 提交
      */
-    submit () {
+    async submit () {
       let self = this
-      self.$emit('close')
+      let packageData = {
+        clubId: self.clubId
+      }
+      let data = await self.$wPost(self.action, packageData)
+      if (data.data) {
+        self.$message({
+          message: '操作成功',
+          type: 'success'
+        })
+        self.$emit('refresh')
+        self.$emit('close')
+      }
     },
 
     /**

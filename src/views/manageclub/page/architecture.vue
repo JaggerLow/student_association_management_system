@@ -1,5 +1,6 @@
 <template>
-  <div class="s-architecture">
+  <div
+    class="s-architecture">
     <div class="s-architecture__box">
       <div class="s-architecture__box--header">
         <span>部门架构</span>
@@ -13,10 +14,15 @@
       </div>
       <div class="s-architecture__box--list">
         <div
+          v-if="architecture.clubDepartment.length === 0"
+          class="s-architecture__listempty">
+          该社团暂无部门组成
+        </div>
+        <div
           v-for="(department, index) in architecture.clubDepartment"
           class="s-architecture__box--card"
           :key="index">
-          <span>{{ department.name }}</span><i class="fa fa-close"></i>
+          <span>{{ department.name }}</span><i class="fa fa-close" @click.stop="deleteClubDepart(department.id)"></i>
         </div>
       </div>
     </div>
@@ -32,6 +38,11 @@
         </el-button>
       </div>
       <div class="s-architecture__box--list">
+        <div
+          v-if="architecture.position.length === 0"
+          class="s-architecture__listempty">
+          该社团暂无职位组成
+        </div>
         <div
           v-for="(position, index) in architecture.position"
           class="s-architecture__box--card"
@@ -53,8 +64,30 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateArchitecture: 'viewsManageclubArchitecture/updateArchitecture'
+      updateArchitecture: 'viewsManageclubArchitecture/updateArchitecture',
+      getClubDepartment: 'viewsManageclubArchitecture/getClubDepartment',
+      getPosition: 'viewsManageclubArchitecture/getPosition'
     }),
+
+    /**
+     * 初始化页面信息
+     */
+    initData () {
+      let self = this
+      self.updateArchitecture({
+        clubId: '',
+        clubDepartment: [],
+        position: [],
+        isDepartShow: false,
+        departForm: {
+          name: ''
+        },
+        isPositionShow: false,
+        positionForm: {
+          name: ''
+        }
+      })
+    },
 
     /**
      * 打开新建部门窗口
@@ -74,7 +107,41 @@ export default {
       self.updateArchitecture({
         isPositionShow: true
       })
+    },
+
+    /**
+     * 删除部门操作
+     */
+    async deleteClubDepart (id) {
+      let self = this
+      let packageData = {
+        clubId: self.architecture.clubId,
+        id: id
+      }
+      let data = await self.$wPost('/deal/club/deleteDepartment.do', packageData)
+      if (data.data) {
+        self.$message({
+          message: '操作成功！',
+          type: 'success'
+        })
+        self.getClubDepartment()
+      }
     }
+  },
+  mounted () {
+    let self = this
+    let clubId = Number(self.$route.query.id)
+    if (clubId) {
+      self.updateArchitecture({
+        clubId: clubId
+      })
+      self.getClubDepartment()
+      self.getPosition()
+    }
+  },
+  beforeDestroy () {
+    let self = this
+    self.initData()
   }
 }
 </script>
@@ -138,6 +205,14 @@ export default {
         padding: 10px;
         width: 100%;
       }
+    }
+    &__listempty {
+      color: $col-deepest-gray;
+      font-size: 25px;
+      height: 250px;
+      line-height: 250px;
+      text-align: center;
+      width: 100%;
     }
   }
 </style>

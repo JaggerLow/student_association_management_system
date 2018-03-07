@@ -13,12 +13,24 @@
           style="margin-top: 30px;">
           <el-form-item label="职位名称">
             <el-input
+              :class="[isEmpty ? 's-input__empty' : '']"
+              @focus="clearCheck"
               v-model="architecture.positionForm.name"
               placeholder="请输入职位名称">
             </el-input>
+            <div
+              v-if="isEmpty && architecture.positionForm.name === ''"
+              class="s-form__empty">
+              请填写 职位名称
+            </div>
+            <div
+              v-if="isEmpty && architecture.positionForm.name !== ''"
+              class="s-form__empty">
+              该职位已存在
+            </div>
           </el-form-item>
         </el-form>
-        <div class="s-newposition__button">确定</div>
+        <div class="s-newposition__button" @click.stop="submitData">确定</div>
       </div>
       <div class="s-dialog__close fa fa-times" @click.stop="closeWindow"></div>
     </div>
@@ -28,6 +40,11 @@
 import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'SDialogNewposition',
+  data () {
+    return {
+      isEmpty: false
+    }
+  },
   computed: {
     ...mapGetters({
       architecture: 'viewsManageclubArchitecture/architecture'
@@ -35,20 +52,61 @@ export default {
   },
   methods: {
     ...mapActions({
+      getPosition: 'viewsManageclubArchitecture/getPosition',
       updateArchitecture: 'viewsManageclubArchitecture/updateArchitecture'
     }),
 
     /**
-     * 关闭登录弹窗
+     * 关闭新建职位弹窗
      */
     closeWindow () {
       let self = this
+      self.isEmpty = false
       self.updateArchitecture({
         isPositionShow: false,
         positionForm: {
           name: ''
         }
       })
+    },
+
+    /**
+     * 清除校验
+     */
+    clearCheck () {
+      let self = this
+      self.isEmpty = false
+    },
+
+    /**
+     * 新建职位提交
+     */
+    async submitData () {
+      let self = this
+      if ([null, ''].indexOf(self.architecture.positionForm.name) > -1) {
+        self.isEmpty = true
+      }
+      for (let item of self.architecture.position) {
+        if (item.name === self.architecture.positionForm.name) {
+          self.isEmpty = true
+          break
+        }
+      }
+      if (!self.isEmpty) {
+        let packageData = {
+          name: self.architecture.positionForm.name,
+          clubId: self.architecture.clubId
+        }
+        let data = await self.$wPost('/deal/club/submitPosition.do', packageData)
+        if (data.data) {
+          self.$message({
+            message: '新建成功！',
+            type: 'success'
+          })
+          await self.getPosition()
+          self.closeWindow()
+        }
+      }
     }
   }
 }

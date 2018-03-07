@@ -73,13 +73,28 @@ export default {
   },
   computed: {
     ...mapGetters({
-      info: 'viewsManageclubBasicinfo/info'
+      info: 'viewsManageclubBasicinfo/info',
+      mamageclub: 'viewsManageclub/mamageclub'
     })
   },
   methods: {
     ...mapActions({
-      updateBasicinfo: 'viewsManageclubBasicinfo/updateBasicinfo'
+      updateBasicinfo: 'viewsManageclubBasicinfo/updateBasicinfo',
+      updateManageclub: 'viewsManageclub/updateManageclub',
+      getManageclubPremit: 'viewsManageclub/getManageclubPremit'
     }),
+
+    /**
+     * 初始数据
+     */
+    initData () {
+      let self = this
+      self.updateManageclub({
+        clubId: '',
+        name: '',
+        premit: ''
+      })
+    },
 
     /**
      * 菜单选择
@@ -98,6 +113,26 @@ export default {
         isUploadShow: false
       })
     }
+  },
+  async mounted () {
+    let self = this
+    let clubId = Number(self.$route.query.id)
+    if (clubId) {
+      self.updateManageclub({
+        clubId: clubId
+      })
+      await self.getManageclubPremit()
+      if ([1, 2].indexOf(self.mamageclub.premit) === -1) {
+        self.$message.error('你没有管理本社团的权限！')
+        self.$router.push('/myclub')
+      }
+    } else {
+      self.$router.push('/myclub')
+    }
+  },
+  beforeDestroy () {
+    let self = this
+    self.initData()
   }
 }
 </script>

@@ -1,15 +1,11 @@
 import * as types from '@/store/mutation-types'
+import Vue from 'vue'
 let state = {
   myclub: {
-    list: [{
-      name: '社团名称',
-      clubId: 100001,
-      logo: '',
-      introduction: '这是一个社团介绍~~~',
-      premit: '1'
-    }],
+    list: [],
     page: 1,
-    count: 2,
+    count: 0,
+    loading: false,
     leaveWindow: {
       isShow: false,
       clubId: ''
@@ -44,6 +40,23 @@ let actions = {
    */
   updateMyclub ({ commit }, payload) {
     commit(types.MYCLUB_SET_MYCLUB, payload)
+  },
+
+  /**
+   * 获取社团列表
+   */
+  async getClubList ({ commit, state }) {
+    commit(types.MYCLUB_SET_MYCLUB, {
+      loading: true
+    })
+    let data = await Vue.wGet('/deal/club/listMyClub.do', {page: state.myclub.page})
+    if (data.data) {
+      commit(types.MYCLUB_SET_MYCLUB, {
+        list: data.data.records,
+        count: data.data.pageCount,
+        loading: false
+      })
+    }
   }
 }
 
