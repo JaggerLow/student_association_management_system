@@ -17,7 +17,7 @@
               </div>
               <div class="s-userinfo__left--item">
                 <div class="s-userinfo__left--label">性别：</div>
-                <div class="s-userinfo__left--text">{{ userinfo.form.gender }}</div>
+                <div class="s-userinfo__left--text">{{ userinfo.form.gender === 0 ? '男' : '女' }}</div>
               </div>
               <div class="s-userinfo__left--item">
                 <div class="s-userinfo__left--label">出生日期：</div>
@@ -62,8 +62,8 @@
               <el-scrollbar
                 wrap-class="s-scrollbar__wrap"
                 view-class="s-scrollbar__list"
-                class="s-userinfo__info--textarea">
-                {{ userinfo.form.selIntroduction }}
+                class="s-userinfo__info--textarea"
+                v-html="userinfo.form.selIntroduction">
               </el-scrollbar>
             </div>
           </div>
@@ -94,7 +94,25 @@ export default {
       let self = this
       self.updateUserinfo({
         isShow: false,
-        userId: ''
+        userId: '',
+        form: {
+          username: '',
+          actualName: '',
+          gender: '',
+          birthday: '',
+          nativePlace: '',
+          department: '',
+          profession: '',
+          grade: '',
+          email: '',
+          phone: '',
+          startYear: '',
+          qq: '',
+          weixin: '',
+          hobbies: '',
+          selIntroduction: '',
+          image: ''
+        }
       })
     }
   }

@@ -31,7 +31,9 @@
             </div>
           </div>
         </div>
-        <div class="s-dynamic__main">
+        <div
+          v-loading="dynamic.loading"
+          class="s-dynamic__main">
           <div
             v-for="(club, index) in dynamic.clubList"
             class="s-box__club--card"
@@ -42,7 +44,7 @@
             </div>
             <div class="s-box__club--info">
               <div class="s-box__club--name">
-                <span @click.stop="linkToClub">{{ club.name }}</span>
+                <span @click.stop="linkToClub(club.clubId)">{{ club.name }}</span>
               </div>
               <div class="s-box__club--introduction">
                 {{ club.introduction }}
@@ -50,7 +52,7 @@
             </div>
             <div class="s-box__club--operate s-box__club--data">
               <div>创建时间：{{ club.createDate }}</div>
-              <div>社团级别：{{ club.level }}</div>
+              <div>社团级别：{{ clubLevel[club.level].label }}</div>
               <div>社团人数：{{ club.scale }} 人</div>
             </div>
           </div>
@@ -71,13 +73,32 @@ export default {
   name: 'Dynamic',
   computed: {
     ...mapGetters({
+      clubLevel: 'clubLevel',
       dynamic: 'viewsDynamic/dynamic'
     })
   },
   methods: {
     ...mapActions({
-      updateClubSearch: 'viewsDynamic/updateClubSearch'
+      updataDynamic: 'viewsDynamic/updataDynamic',
+      updateClubSearch: 'viewsDynamic/updateClubSearch',
+      getClubList: 'viewsDynamic/getClubList'
     }),
+
+    /**
+     * 初始化页面信息
+     */
+    initData () {
+      let self = this
+      self.updataDynamic({
+        loading: false,
+        clubSearch: {
+          page: 1,
+          sort: ''
+        },
+        clubList: [],
+        clubCount: 1
+      })
+    },
 
     /**
      * 修改社团列表排序
@@ -88,15 +109,16 @@ export default {
         self.updateClubSearch({
           sort: sort
         })
+        self.getClubList()
       }
     },
 
     /**
      * 跳转社团首页
      */
-    linkToClub () {
+    linkToClub (id) {
       let self = this
-      self.$router.push('/club')
+      self.$router.push(`/club?id=${id}`)
     },
 
     /**
@@ -107,8 +129,12 @@ export default {
       self.updateClubSearch({
         page: val
       })
-      console.log(self.dynamic.clubSearch)
+      self.getClubList()
     }
+  },
+  mounted () {
+    let self = this
+    self.getClubList()
   }
 }
 </script>

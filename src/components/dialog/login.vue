@@ -174,6 +174,7 @@ export default {
           })
           self.updateUserInfo(userInfo)
           self.initData()
+          location.reload()
         } else {
           self.$message.error('登录失败，账号或者密码错误！')
         }

@@ -3,7 +3,7 @@
     <div class="s-box__manage--header">
       <el-input
         class="s-input__search"
-        v-model="apply.search.name"
+        v-model="apply.search.keyword"
         size="small"
         placeholder="请输入成员名称"
         @keyup.native.enter="searchTable">
@@ -15,10 +15,11 @@
       </el-input>
     </div>
     <el-table
+      v-loading="apply.loading"
       :data="apply.table"
       style="width: 100%">
       <el-table-column
-        prop="name"
+        prop="actualName"
         label="姓名"
         width="88">
       </el-table-column>
@@ -89,26 +90,61 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateUserinfo: 'sUserinfo/updateUserinfo'
+      getUserInfo: 'sUserinfo/getUserInfo',
+      updateUserinfo: 'sUserinfo/updateUserinfo',
+      updateApply: 'viewsManageclubApply/updateApply',
+      getApplyList: 'viewsManageclubApply/getApplyList'
     }),
+
+    /**
+     * 页面数据初始化
+     */
+    initData () {
+      let self = this
+      self.updateApply({
+        clubId: '',
+        loading: false,
+        search: {
+          keyword: '',
+          page: 1
+        },
+        table: [],
+        count: 1
+      })
+    },
 
     /**
      * 操作
      */
-    operateApply (row, operate) {
+    async operateApply (row, operate) {
+      let self = this
       let packageData = {
-        clubId: 100001,
+        clubId: self.apply.clubId,
         userId: row.userId,
         isAgree: operate
       }
-      console.log(packageData)
+      let data = await self.$wPost('/deal/clubApply/audit.do', packageData)
+      if (data.data) {
+        self.$message({
+          message: '操作成功',
+          type: 'success'
+        })
+        self.updateApply({
+          search: {
+            keyword: '',
+            page: 1
+          }
+        })
+        self.getApplyList()
+      }
     },
 
     /**
      * 查看申请人个人信息
      */
-    applyDetail (row) {
+    async applyDetail (row) {
       let self = this
+      await self.getUserInfo(row.userId)
       self.updateUserinfo({
         isShow: true,
         userId: row.userId
@@ -119,15 +155,43 @@ export default {
      * 表单筛选
      */
     searchTable () {
-      console.log(1)
+      let self = this
+      self.updateApply({
+        search: {
+          keyword: self.apply.search.keyword,
+          page: 1
+        }
+      })
+      self.getApplyList()
     },
 
     /**
      * 翻页触发事件
      */
     changePage (val) {
-      console.log(val)
+      let self = this
+      self.updateApply({
+        search: {
+          keyword: self.apply.search.keyword,
+          page: val
+        }
+      })
+      self.getApplyList()
     }
+  },
+  mounted () {
+    let self = this
+    let clubId = Number(self.$route.query.id)
+    if (clubId) {
+      self.updateApply({
+        clubId: clubId
+      })
+      self.getApplyList()
+    }
+  },
+  beforeDestroy () {
+    let self = this
+    self.initData()
   }
 }
 </script>

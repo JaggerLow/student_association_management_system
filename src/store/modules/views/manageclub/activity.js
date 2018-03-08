@@ -1,17 +1,13 @@
 import * as types from '@/store/mutation-types'
+import Vue from 'vue'
 let state = {
   activity: {
+    clubId: '',
     search: {
       page: 1
     },
-    table: [{
-      id: 1,
-      name: '超级无敌圣诞趴',
-      startDate: '2018-02-22 9:00',
-      endDate: '2018-02-22 18:00',
-      place: '广州大学华软软件学院喷泉广场北边院团学摊位'
-    }],
-    count: 2,
+    table: [],
+    count: 1,
     deleteActivity: {
       isShow: false,
       clubId: '',
@@ -43,6 +39,21 @@ let actions = {
    */
   updateActivity ({ commit }, payload) {
     commit(types.ACTIVITY_SET_ACTIVITY, payload)
+  },
+
+  /**
+   * 获取社团活动列表
+   */
+  async getActivityList ({ commit, state }) {
+    let packageData = {
+      clubId: state.activity.clubId,
+      page: state.activity.search.page
+    }
+    let data = await Vue.wPost('/deal/clubActivity/list.do', packageData)
+    commit(types.ACTIVITY_SET_ACTIVITY, {
+      table: data.data.records,
+      count: data.data.count
+    })
   }
 }
 

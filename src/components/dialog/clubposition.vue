@@ -14,6 +14,8 @@
           <el-form-item label="职位名称">
             <el-select
               class="s-select__form"
+              :class="[isEmpty ? 's-input__empty' : '']"
+              @focus="clearCheck"
               v-model="members.positionForm.id"
               placeholder="请选择职位">
               <el-option
@@ -23,6 +25,7 @@
                 :value="position.id">
               </el-option>
             </el-select>
+            <div v-if="isEmpty" class="s-form__empty">请分配职位</div>
           </el-form-item>
         </el-form>
         <div class="s-clubposition__button" @click.stop="submit">确定</div>
@@ -35,6 +38,11 @@
 import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'SDialogClubposition',
+  data () {
+    return {
+      isEmpty: false
+    }
+  },
   computed: {
     ...mapGetters({
       members: 'viewsManageclubMembers/members'
@@ -42,21 +50,42 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateMembers: 'viewsManageclubMembers/updateMembers'
+      updateMembers: 'viewsManageclubMembers/updateMembers',
+      getMemberList: 'viewsManageclubMembers/getMemberList'
     }),
+
+    /**
+     * 清空校验
+     */
+    clearCheck () {
+      let self = this
+      self.isEmpty = false
+    },
 
     /**
      * 部门提交
      */
-    submit () {
+    async submit () {
       let self = this
-      let packageData = {
-        clubId: 100001,
-        userId: self.members.memberId,
-        id: self.members.positionForm.id
+      if (self.members.positionForm.id === '') {
+        self.isEmpty = true
       }
-      console.log(packageData)
-      self.closeWindow()
+      if (!self.isEmpty) {
+        let packageData = {
+          clubId: self.members.clubId,
+          userId: self.members.memberId,
+          id: self.members.positionForm.id
+        }
+        let data = await self.$wPost('/deal/club/distributePosition.do', packageData)
+        if (data.data) {
+          self.$message({
+            message: '操作成功！',
+            type: 'success'
+          })
+          await self.getMemberList()
+          self.closeWindow()
+        }
+      }
     },
 
     /**
@@ -64,6 +93,7 @@ export default {
      */
     closeWindow () {
       let self = this
+      self.isEmpty = false
       self.updateMembers({
         isPositionShow: false,
         memberId: '',

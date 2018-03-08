@@ -6,6 +6,7 @@
           class="s-select__search"
           v-model="members.search.clubDepartment"
           size="small"
+          @change="searchTable"
           placeholder="请选择部门">
           <el-option
             v-for="(clubDepartment, index) in members.clubDepartmentList"
@@ -18,6 +19,7 @@
           class="s-select__search"
           v-model="members.search.position"
           size="small"
+          @change="searchTable"
           placeholder="请选择职位">
           <el-option
             v-for="(position, index) in members.positionList"
@@ -28,7 +30,7 @@
         </el-select>
         <el-input
           class="s-input__search"
-          v-model="members.search.name"
+          v-model="members.search.keyword"
           placeholder="请输入成员名称"
           size="small"
           @keyup.native.enter="searchTable">
@@ -43,17 +45,17 @@
         :data="members.table"
         style="width: 100%">
         <el-table-column
-          prop="name"
+          prop="actualName"
           label="姓名"
           width="88">
         </el-table-column>
         <el-table-column
-          prop="clubDepartment"
+          prop="clubDepartmentName"
           label="部门"
           width="120">
         </el-table-column>
         <el-table-column
-          prop="position"
+          prop="positionName"
           label="职位"
           width="88">
         </el-table-column>
@@ -83,16 +85,47 @@
           <template slot-scope="scope">
             <div class="s-table__operate">
               <div>
-                <span class="s-table__operate--default" @click.stop="openClubDepart(scope.row)">部门</span>
+                <span
+                  v-if="mamageclub.premit === 1 || mamageclub.premit !== scope.row.permit || scope.row.userId === userInfo.userId"
+                  class="s-table__operate--default" @click.stop="openClubDepart(scope.row)">部门
+                </span>
+                <span
+                  v-else>
+                  部门
+                </span>
               </div>
               <div>
-                <span class="s-table__operate--default" @click.stop="openClubPosition(scope.row)">职位</span>
+                <span
+                  v-if="mamageclub.premit === 1 || mamageclub.premit !== scope.row.permit || scope.row.userId === userInfo.userId"
+                  class="s-table__operate--default" @click.stop="openClubPosition(scope.row)">
+                  职位
+                </span>
+                <span
+                  v-else>
+                  职位
+                </span>
               </div>
               <div>
-                <span class="s-table__operate--default" @click.stop="openClubPermit(scope.row)">权限</span>
+                <span
+                  v-if="mamageclub.premit === 1"
+                  class="s-table__operate--default" @click.stop="openClubPermit(scope.row)">
+                  权限
+                </span>
+                <span
+                  v-else>
+                  权限
+                </span>
               </div>
               <div>
-                <span class="s-table__operate--delete" @click.stop="openDeleteMember(scope.row)">删除</span>
+                <span
+                  v-if="(mamageclub.premit === 1 || mamageclub.premit !== scope.row.permit) && scope.row.userId !== userInfo.userId && scope.row.permit !== 1"
+                  class="s-table__operate--delete" @click.stop="openDeleteMember(scope.row)">
+                  删除
+                </span>
+                <span
+                  v-else>
+                  删除
+                </span>
               </div>
             </div>
           </template>
@@ -109,26 +142,72 @@
       v-if="members.deleteMember.isShow"
       :title="'删除成员'"
       :text="'您确定要删除该成员么？'"
+      :action="'/deal/club/deleteMember.do'"
       :deletetype="2"
       :clubId="members.deleteMember.clubId"
       :id="members.deleteMember.userId"
-      @close="closeDeleteMember">
+      @close="closeDeleteMember"
+      @refresh="getMemberList">
     </s-dialog-deletewarning>
   </div>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { cloneDeep } from 'lodash'
 export default {
   name: 'Members',
   computed: {
     ...mapGetters({
-      members: 'viewsManageclubMembers/members'
+      userInfo: 'userInfo',
+      members: 'viewsManageclubMembers/members',
+      mamageclub: 'viewsManageclub/mamageclub'
     })
   },
   methods: {
     ...mapActions({
-      updateMembers: 'viewsManageclubMembers/updateMembers'
+      updateMembers: 'viewsManageclubMembers/updateMembers',
+      getMemberList: 'viewsManageclubMembers/getMemberList',
+      getClubDepart: 'viewsManageclubMembers/getClubDepart',
+      getPosition: 'viewsManageclubMembers/getPosition'
     }),
+
+    /**
+     * 初始化页面数据
+     */
+    initData () {
+      let self = this
+      self.updateMembers({
+        clubId: '',
+        search: {
+          clubDepartment: '',
+          position: '',
+          keyword: '',
+          page: 1
+        },
+        count: 1,
+        table: [],
+        clubDepartmentList: [],
+        positionList: [],
+        isClubdepartShow: false,
+        memberId: '',
+        clubdepartForm: {
+          id: ''
+        },
+        isPositionShow: false,
+        positionForm: {
+          id: ''
+        },
+        isPermitShow: false,
+        permitForm: {
+          permit: ''
+        },
+        deleteMember: {
+          isShow: false,
+          clubId: '',
+          userId: ''
+        }
+      })
+    },
 
     /**
      * 打开删除成员弹框
@@ -138,7 +217,7 @@ export default {
       self.updateMembers({
         deleteMember: {
           isShow: true,
-          clubId: 100001,
+          clubId: self.members.clubId,
           userId: row.userId
         }
       })
@@ -165,7 +244,10 @@ export default {
       let self = this
       self.updateMembers({
         isClubdepartShow: true,
-        memberId: row.userId
+        memberId: row.userId,
+        clubdepartForm: {
+          id: String(row.clubDepartment)
+        }
       })
     },
 
@@ -176,7 +258,10 @@ export default {
       let self = this
       self.updateMembers({
         isPositionShow: true,
-        memberId: row.userId
+        memberId: row.userId,
+        positionForm: {
+          id: String(row.position)
+        }
       })
     },
 
@@ -187,7 +272,10 @@ export default {
       let self = this
       self.updateMembers({
         isPermitShow: true,
-        memberId: row.userId
+        memberId: row.userId,
+        permitForm: {
+          permit: String(row.permit)
+        }
       })
     },
 
@@ -195,15 +283,43 @@ export default {
      * 表单筛选
      */
     searchTable () {
-      console.log(1)
+      let self = this
+      let searchData = cloneDeep(self.members.search)
+      searchData.page = 1
+      self.updateMembers({
+        search: searchData
+      })
+      self.getMemberList()
     },
 
     /**
      * 翻页触发事件
      */
     changePage (val) {
-      console.log(val)
+      let self = this
+      let searchData = cloneDeep(self.members.search)
+      searchData.page = val
+      self.updateMembers({
+        search: searchData
+      })
+      self.getMemberList()
     }
+  },
+  mounted () {
+    let self = this
+    let clubId = Number(self.$route.query.id)
+    if (clubId) {
+      self.updateMembers({
+        clubId: clubId
+      })
+      self.getClubDepart()
+      self.getPosition()
+      self.getMemberList()
+    }
+  },
+  beforeDestroy () {
+    let self = this
+    self.initData()
   }
 }
 </script>

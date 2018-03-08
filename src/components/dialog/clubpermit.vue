@@ -16,9 +16,23 @@
               class="s-select__form"
               v-model="members.permitForm.permit"
               placeholder="请选择管理权限">
-              <el-option key="1" label="最高管理员" value="1"></el-option>
-              <el-option key="2" label="普通管理员" value="2"></el-option>
-              <el-option key="3" label="社团成员" value="3"></el-option>
+              <el-option
+                key="1"
+                label="最高管理员"
+                value="1">
+              </el-option>
+              <el-option
+                key="2"
+                label="普通管理员"
+                value="2"
+                :disabled="userInfo.userId === members.memberId && members.permitForm.permit === '1'">
+              </el-option>
+              <el-option
+                key="3"
+                label="社团成员"
+                value="3"
+                :disabled="userInfo.userId === members.memberId && members.permitForm.permit === '1'">
+              </el-option>
             </el-select>
           </el-form-item>
         </el-form>
@@ -34,26 +48,37 @@ export default {
   name: 'SDialogClubpermit',
   computed: {
     ...mapGetters({
+      userInfo: 'userInfo',
       members: 'viewsManageclubMembers/members'
     })
   },
   methods: {
     ...mapActions({
-      updateMembers: 'viewsManageclubMembers/updateMembers'
+      updateMembers: 'viewsManageclubMembers/updateMembers',
+      getMemberList: 'viewsManageclubMembers/getMemberList',
+      getManageclubPremit: 'viewsManageclub/getManageclubPremit'
     }),
 
     /**
      * 部门提交
      */
-    submit () {
+    async submit () {
       let self = this
       let packageData = {
-        clubId: 100001,
+        clubId: self.members.clubId,
         userId: self.members.memberId,
-        permit: self.members.permitForm.permit
+        premit: self.members.permitForm.permit
       }
-      console.log(packageData)
-      self.closeWindow()
+      let data = await self.$wPost('/deal/club/distributePremit.do', packageData)
+      if (data.data) {
+        self.$message({
+          message: '操作成功！',
+          type: 'success'
+        })
+        await self.getMemberList()
+        await self.getManageclubPremit()
+        self.closeWindow()
+      }
     },
 
     /**

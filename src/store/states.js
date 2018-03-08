@@ -68,30 +68,30 @@ export default {
   }],
   activityType: [{
     label: '招新',
-    value: '0'
-  },
-  {
-    label: '体育',
     value: '1'
   },
   {
-    label: '讲座',
+    label: '体育',
     value: '2'
   },
   {
-    label: '晚会',
+    label: '讲座',
     value: '3'
   },
   {
-    label: '比赛',
+    label: '晚会',
     value: '4'
   },
   {
-    label: '宣讲会',
+    label: '比赛',
     value: '5'
   },
   {
-    label: '其他',
+    label: '宣讲会',
     value: '6'
+  },
+  {
+    label: '其他',
+    value: '7'
   }]
 }

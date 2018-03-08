@@ -1,39 +1,18 @@
 import * as types from '@/store/mutation-types'
+import Vue from 'vue'
 let state = {
   members: {
+    clubId: '',
     search: {
       clubDepartment: '',
       position: '',
-      name: '',
+      keyword: '',
       page: 1
     },
-    count: 2,
-    table: [{
-      name: '梁宇',
-      clubDepartment: '宣传部',
-      userId: 1230456,
-      position: '部长',
-      department: '电子系',
-      startYear: '2014',
-      phone: '13622323592',
-      qq: '645091114'
-    }],
-    clubDepartmentList: [{
-      name: '宣传部',
-      id: '1'
-    },
-    {
-      name: '外联部',
-      id: '2'
-    }],
-    positionList: [{
-      name: '主席',
-      id: '1'
-    },
-    {
-      name: '部长',
-      id: '2'
-    }],
+    count: 1,
+    table: [],
+    clubDepartmentList: [],
+    positionList: [],
     isClubdepartShow: false,
     memberId: '',
     clubdepartForm: {
@@ -78,6 +57,55 @@ let actions = {
    */
   updateMembers ({ commit }, payload) {
     commit(types.MEMBERS_SET_MEMBERS, payload)
+  },
+
+  /**
+   * 获取成员信息列表
+   */
+  async getMemberList ({ commit, state }) {
+    let packageData = {
+      clubId: state.members.clubId,
+      clubDepartment: state.members.search.clubDepartment,
+      position: state.members.search.position,
+      keyword: state.members.search.keyword,
+      page: state.members.search.page
+    }
+    let data = await Vue.wPost('/deal/club/listMember.do', packageData)
+    for (let item of data.data.records) {
+      for (let prop in item) {
+        if ([null, ''].indexOf(item[prop]) > -1) {
+          item[prop] = '-'
+        }
+      }
+    }
+    commit(types.MEMBERS_SET_MEMBERS, {
+      table: data.data.records,
+      count: data.data.pageCount
+    })
+  },
+
+  /**
+   * 获取部门下拉选项
+   */
+  async getClubDepart ({ commit, state }) {
+    let data = await Vue.wPost('/listDepartment.do', {
+      clubId: state.members.clubId
+    })
+    commit(types.MEMBERS_SET_MEMBERS, {
+      clubDepartmentList: data.data.records
+    })
+  },
+
+  /**
+   * 获取职位下拉选项
+   */
+  async getPosition ({ commit, state }) {
+    let data = await Vue.wPost('/listPosition.do', {
+      clubId: state.members.clubId
+    })
+    commit(types.MEMBERS_SET_MEMBERS, {
+      positionList: data.data.records
+    })
   }
 }
 

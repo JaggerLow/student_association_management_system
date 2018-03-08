@@ -56,10 +56,12 @@
       v-if="activity.deleteActivity.isShow"
       :title="'删除活动'"
       :text="'您确定要删除该活动么？'"
-      :deletetype="2"
+      :deletetype="3"
+      :action="'/deal/clubActivity/delete.do'"
       :clubId="activity.deleteActivity.clubId"
       :id="activity.deleteActivity.id"
-      @close="closeDeleteActivity">
+      @close="closeDeleteActivity"
+      @refresh="getActivityList">
     </s-dialog-deletewarning>
   </div>
 </template>
@@ -74,7 +76,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateActivity: 'viewsManageclubActivity/updateActivity'
+      updateActivity: 'viewsManageclubActivity/updateActivity',
+      getActivityList: 'viewsManageclubActivity/getActivityList'
     }),
 
     /**
@@ -109,7 +112,13 @@ export default {
      * 翻页触发事件
      */
     changePage (val) {
-      console.log(val)
+      let self = this
+      self.updateActivity({
+        search: {
+          page: val
+        }
+      })
+      self.getActivityList()
     },
 
     /**
@@ -117,7 +126,17 @@ export default {
      */
     linkToNewactivity () {
       let self = this
-      self.$router.push('/manageclub/newactivity')
+      self.$router.push(`/manageclub/newactivity?id=${self.activity.clubId}`)
+    }
+  },
+  mounted () {
+    let self = this
+    let clubId = Number(self.$route.query.id)
+    if (clubId) {
+      self.updateActivity({
+        clubId: clubId
+      })
+      self.getActivityList()
     }
   }
 }

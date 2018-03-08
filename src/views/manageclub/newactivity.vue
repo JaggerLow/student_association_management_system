@@ -95,13 +95,15 @@
           </el-input>
           <div v-if="!newactivity.mustProp.place" class="s-form__empty">请填写 活动地点</div>
         </el-form-item>
-        <el-form-item label="活动海报" required>
+        <el-form-item label="活动海报">
           <el-upload
+            name="uploadFile"
             class="upload-demo"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action="/uploadImage.do"
+            :on-success="saveImage"
             :show-file-list="false">
             <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件</div>
           </el-upload>
         </el-form-item>
         <el-form-item label="举办单位">
@@ -127,7 +129,15 @@
         </el-form-item>
       </el-form>
       <div class="s-newactivity__image">
-        海报预览
+        <div
+          v-if="[null, ''].indexOf(newactivity.form.poster) > -1"
+          class="s-newactivity__image--empty">
+          海报预览
+        </div>
+        <img
+          v-if="[null, ''].indexOf(newactivity.form.poster) === -1"
+          :src="newactivity.form.poster"
+          alt="活动海报">
       </div>
     </div>
   </div>
@@ -140,12 +150,16 @@ export default {
   computed: {
     ...mapGetters({
       activityType: 'activityType',
-      newactivity: 'viewsManageclubNewactivity/newactivity'
+      newactivity: 'viewsManageclubNewactivity/newactivity',
+      mamageclub: 'viewsManageclub/mamageclub'
     })
   },
   methods: {
     ...mapActions({
-      updateNewactivity: 'viewsManageclubNewactivity/updateNewactivity'
+      updateNewactivity: 'viewsManageclubNewactivity/updateNewactivity',
+      getManageclubPremit: 'viewsManageclubNewactivity/getManageclubPremit',
+      getTimes: 'viewsManageclubNewactivity/getTimes',
+      updateNewForm: 'viewsManageclubNewactivity/updateNewForm'
     }),
 
     /**
@@ -154,6 +168,9 @@ export default {
     initData () {
       let self = this
       self.updateNewactivity({
+        name: '',
+        premit: '',
+        clubId: '',
         form: {
           type: '',
           title: '',
@@ -173,15 +190,10 @@ export default {
           startTime: true,
           endDate: true,
           endTime: true,
-          // poster: true,
           place: true,
           description: true
         },
-        timeList: [
-          '00:00',
-          '00:30',
-          '01:00'
-        ],
+        timeList: [],
         packageData: {}
       })
     },
@@ -192,6 +204,16 @@ export default {
     clearCheck (prop) {
       let self = this
       self.newactivity.mustProp[prop] = true
+    },
+
+    /**
+     * 保存海报
+     */
+    saveImage (response, file, fileList) {
+      let self = this
+      self.updateNewForm({
+        poster: file.response.data
+      })
     },
 
     /**
@@ -208,6 +230,7 @@ export default {
       }
       packageData.startDate = `${data.startDate} ${data.startTime}`
       packageData.endDate = `${data.endDate} ${data.endTime}`
+      packageData.clubId = self.newactivity.clubId
       self.updateNewactivity({
         packageData: packageData
       })
@@ -234,7 +257,7 @@ export default {
     /**
      * 提交创建活动
      */
-    updateForm () {
+    async updateForm () {
       let self = this
       let isEmpty = false
       self.checkFormat()
@@ -246,13 +269,33 @@ export default {
       }
       if (!isEmpty) {
         self.packageData()
-        console.log(self.newactivity.packageData)
+        let data = await self.$wPost('/deal/clubActivity/submit.do', self.newactivity.packageData)
+        if (data.data) {
+          self.$message({
+            message: '活动创建成功',
+            type: 'success'
+          })
+          self.$router.push(`/manageclub?id=${self.newactivity.clubId}`)
+        }
       } else {
         self.$message.error('请完善必填信息')
       }
     }
   },
-  mounted () {
+  async mounted () {
+    let self = this
+    let clubId = Number(self.$route.query.id)
+    if (clubId) {
+      self.getTimes()
+      self.updateNewactivity({
+        clubId: clubId
+      })
+      await self.getManageclubPremit()
+      if ([1, 2].indexOf(self.newactivity.premit) === -1) {
+        self.$message.error('你没有管理本社团的权限！')
+        self.$router.push('/myclub')
+      }
+    }
   },
   beforeDestroy () {
     let self = this
@@ -276,8 +319,23 @@ export default {
       height: 400px;
       margin-right: 200px;
       margin-top: 30px;
+      position: relative;
       width: 300px;
-      z-index: 100;
+      &--empty {
+        color: $col-deepest-gray;
+        font-size: 25px;
+        line-height: 400px;
+        text-align: center;
+        width: 100%;
+      }
+      img {
+        left: 50%;
+        max-height: 400px;
+        max-width: 300px;
+        position: absolute;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
     }
   }
 </style>

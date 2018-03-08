@@ -43,6 +43,12 @@ export default {
       let packageData = {
         clubId: self.clubId
       }
+      if (self.deletetype === 2) {
+        packageData.userId = self.id
+      }
+      if (self.deletetype === 3) {
+        packageData.id = self.id
+      }
       let data = await self.$wPost(self.action, packageData)
       if (data.data) {
         self.$message({
