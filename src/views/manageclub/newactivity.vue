@@ -295,6 +295,9 @@ export default {
         self.$message.error('你没有管理本社团的权限！')
         self.$router.push('/myclub')
       }
+    } else {
+      self.$message.error('无效的访问方式！')
+      self.$router.push('/myclub')
     }
   },
   beforeDestroy () {

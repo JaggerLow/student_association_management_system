@@ -81,6 +81,26 @@ export default {
     }),
 
     /**
+     * 初始化页面数据
+     */
+    initData () {
+      let self = this
+      self.updateActivity({
+        clubId: '',
+        search: {
+          page: 1
+        },
+        table: [],
+        count: 1,
+        deleteActivity: {
+          isShow: false,
+          clubId: '',
+          id: ''
+        }
+      })
+    },
+
+    /**
      * 打开删除活动弹框
      */
     openDeleteActivity (row) {
@@ -88,7 +108,7 @@ export default {
       self.updateActivity({
         deleteActivity: {
           isShow: true,
-          clubId: 100001,
+          clubId: self.activity.clubId,
           id: row.id
         }
       })
@@ -138,6 +158,10 @@ export default {
       })
       self.getActivityList()
     }
+  },
+  beforeDestroy () {
+    let self = this
+    self.initData()
   }
 }
 </script>

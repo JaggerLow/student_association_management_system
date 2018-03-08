@@ -28,7 +28,7 @@
               <ul>
                 <li><span @click.stop="linkTo('/info')">个人信息</span></li>
                 <li><span @click.stop="linkTo('/myclub')">我的社团</span></li>
-                <li><span>修改密码</span></li>
+                <!-- <li><span>修改密码</span></li> -->
                 <li><span @click.stop="loginOut()">退出登录</span></li>
               </ul>
             </div>
