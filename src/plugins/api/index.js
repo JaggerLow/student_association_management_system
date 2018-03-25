@@ -71,8 +71,35 @@ plugin.install = Vue => {
     })
   }
 
+  /**
+   * http POST无参请求
+   * @param {String} uri 请求链接
+   * @param {Object} params 请求参数
+   * @param {Function} prev 返回数据预处理函数
+   */
+  Vue.prototype.$sPost = (uri, params = {}, prev = data => data) => {
+    return new Promise((resolve, reject) => {
+      Vue.http.post(uri, params, {
+        emulateJSON: true,
+        emulateHTTP: true
+      }).then(response => {
+        if (typeof response.body === 'string') {
+          response.body = JSON.parse(response.body)
+        }
+        response.body = prev(response.body)
+        if (verify(response.body)) {
+          resolve(response.body)
+        }
+      }, response => {
+        error(response)
+        reject(response)
+      })
+    })
+  }
+
   Vue.wGet = Vue.prototype.$wGet
   Vue.wPost = Vue.prototype.$wPost
+  Vue.sPost = Vue.prototype.$sPost
 }
 
 /**

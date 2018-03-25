@@ -18,10 +18,17 @@
       border: 1px solid $col-border;
       border-radius: 4px;
       box-shadow: 0 1px 3px #ccc;
+      cursor: pointer;
       height: 150px;
       margin: 10px 0;
       padding: 10px 25px;
       width: 100%;
+      &:hover {
+        box-shadow: 0 3px 3px #ccc; 
+        .s-box__club--name {
+          color: $col-dark-blue;
+        }
+      }
     }
     &--data {
       display: flex;
@@ -52,7 +59,6 @@
     }
     &--logo {
       background: #999;
-      cursor: pointer;
       float: left;
       height: 100%;
       width: 130px;
@@ -66,12 +72,6 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 100%;
-      span {
-        cursor: pointer;
-        &:hover {
-          color: $col-dark-blue;
-        }
-      }
     }
     &--operate {
       float: left;

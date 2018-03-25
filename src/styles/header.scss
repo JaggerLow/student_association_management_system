@@ -73,12 +73,18 @@
       width: 50px;
     }
     &--icon {
-      background: #999;
+      border: none;
       float: left;
       border-radius: 50%; 
       height: 40px;
       margin: 10px 0;
+      overflow: hidden;
       width: 40px;
+      img {
+        display: block;
+        height: 40px;
+        width: 40px;
+      }
     }
     &--info {
       color: $col-deepest-gray;

@@ -148,7 +148,7 @@ export default {
      */
     async getApi (parm) {
       let self = this
-      let data = await self.$wPost(self.action, parm)
+      let data = await self.$sPost(self.action, parm)
       if (data.data) {
         await self.$emit('input', data.data)
         self.loading = false

@@ -16,14 +16,14 @@
         <div
           v-for="(club, index) in myclub.list"
           class="s-box__club--card"
+          @click.stop="linkToClub(club.clubId)"
           :key="index">
           <div
-            class="s-box__club--logo"
-            @click.stop="linkToClub">
+            class="s-box__club--logo">
           </div>
           <div class="s-box__club--info">
             <div class="s-box__club--name">
-              <span @click.stop="linkToClub">{{ club.name }}</span>
+              <span>{{ club.name }}</span>
             </div>
             <div class="s-box__club--introduction">
               <span v-if="[null, ''].indexOf(club.introduction) > -1">该社团暂无公告~~</span>
@@ -198,9 +198,9 @@ export default {
     /**
      * 跳转社团首页
      */
-    linkToClub () {
+    linkToClub (id) {
       let self = this
-      self.$router.push('/club')
+      self.$router.push(`/club?id=${id}`)
     },
 
     /**

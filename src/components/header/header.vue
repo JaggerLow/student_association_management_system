@@ -17,7 +17,10 @@
         </li>
       </ul>
       <div v-if="isShowInfo" class="s-header__main--box" style="float: right;">
-        <div class="s-header__main--icon"></div>
+        <div class="s-header__main--icon">
+          <img v-if="['', null].indexOf(userInfo.image) > -1" src="../../assets/default_img.jpg" alt="默认头像">
+          <img v-else :src="userInfo.image" alt="SAMS头像">
+        </div>
         <div class="s-header__main--info">
           <div v-if="!userInfo.isLogin">
             <span @click.stop="login">登录</span> / <span @click.stop="linkTo('/registered')">注册</span>

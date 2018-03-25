@@ -117,7 +117,10 @@
         </el-form-item>
       </el-form>
       <div class="s-info__avatar">
-        <div class="s-info__avatar--image"></div>
+        <div class="s-info__avatar--image">
+          <img v-if="['', null].indexOf(info.image) > -1" src="../../assets/default_img.jpg">
+          <img v-else :src="info.form.image">
+        </div>
         <div class="s-info__avatar--button" @click.stop="uploadImage">上传头像</div>
       </div>
     </div>
@@ -142,6 +145,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      checkLogin: 'checkLogin',
       updateInfo: 'viewsInfo/updateInfo',
       getInfo: 'viewsInfo/getInfo'
     }),
@@ -249,6 +253,7 @@ export default {
           self.updateInfo({
             packageData: {}
           })
+          self.checkLogin()
           self.getInfo()
         }
       } else {
@@ -316,10 +321,16 @@ export default {
       }
       &--image {
         background: #eee;
+        border: none;
         border: 1px solid $col-border;
         height: 200px;
         margin-bottom: 20px;
+        overflow: hidden;
         width: 100%;
+        img {
+          display: block;
+          height: 200px;
+        }
       }
     }
   }

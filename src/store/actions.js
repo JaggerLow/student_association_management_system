@@ -23,12 +23,14 @@ export default {
   async checkLogin ({ dispatch, commit }) {
     let data = await Vue.wPost('/checkLogin.do')
     let userInfo = {
+      image: '',
       username: '',
       userId: '',
       isMaster: false,
       isLogin: false
     }
     if (data.data) {
+      userInfo.image = data.data.image
       userInfo.username = data.data.username
       userInfo.userId = data.data.userId
       userInfo.isMaster = data.data.isMaster

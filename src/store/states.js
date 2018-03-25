@@ -1,6 +1,7 @@
 export default {
   isShowInfo: true,
   userInfo: {
+    image: '',
     username: '',
     userId: '',
     isMaster: false,

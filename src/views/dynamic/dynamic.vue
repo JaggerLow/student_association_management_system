@@ -37,14 +37,14 @@
           <div
             v-for="(club, index) in dynamic.clubList"
             class="s-box__club--card"
+            @click.stop="linkToClub(club.clubId)"
             :key="index">
             <div
-              class="s-box__club--logo"
-              @click.stop="linkToClub">
+              class="s-box__club--logo">
             </div>
             <div class="s-box__club--info">
               <div class="s-box__club--name">
-                <span @click.stop="linkToClub(club.clubId)">{{ club.name }}</span>
+                <span>{{ club.name }}</span>
               </div>
               <div class="s-box__club--introduction">
                 {{ club.introduction }}
