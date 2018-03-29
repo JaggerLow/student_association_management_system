@@ -5,7 +5,12 @@
         <div class="s-club__topcard">
           <div class="s-club__info flex">
             <div class="s-club__header">
-              <img/>
+              <img
+                v-if="[null, ''].indexOf(club.info.logo) > -1"
+                src="../../assets/default_club.jpg">
+              <img
+                v-else
+                :src="club.info.logo">
             </div>
             <div class="s-club__name">
               {{ club.info.name }}
@@ -112,7 +117,11 @@
               <div class="s-club__title">
                 <span class="s-club__span"></span>
                 社团相册
-                <span class="s-club__more">更多图片</span>
+                <span
+                  v-if="club.info.albumList.length !== 0"
+                  class="s-club__more">
+                  更多图片
+                </span>
               </div>
               <div class="s-club__article">
                 <div
@@ -140,7 +149,10 @@
                   v-for="(member, index) in club.info.memberList"
                   class="s-club__article--membercard"
                   :key="index">
-                  <div class="s-club__article--memberimg"></div>
+                  <div class="s-club__article--memberimg">
+                    <img v-if="['', null].indexOf(member.image) > -1" src="../../assets/default_img.jpg">
+                    <img v-else :src="member.image">
+                  </div>
                   <div class="s-club__article--username" @click.stop="memberDetail(member)">
                     <span>{{ member.username }}</span>
                   </div>
@@ -326,7 +338,13 @@ export default {
         border-radius: 50%;
         height: 80px;
         margin: 0 auto;
+        overflow: hidden;
         width: 80px;
+        img {
+          display: block;
+          height: 80px;
+          width: 80px;
+        }
       }
       &--username {
         height: 30px;
@@ -450,6 +468,7 @@ export default {
     }
     &__header {
       margin-top: 20px;
+      overflow: hidden;
       img {
         border: 4px solid $col-border;
         border-radius: 100%;

@@ -1,6 +1,6 @@
 @import './core/var';
 .s-box {
-  background: $col-white;
+  background: #fdfdfd;;
   margin: 0 auto;
   &__club {
     &--button {
@@ -58,10 +58,15 @@
       width: 100%;
     }
     &--logo {
-      background: #999;
       float: left;
       height: 100%;
+      overflow: hidden;
       width: 130px;
+      img {
+        display: block !important;
+        height: 130px !important;
+        width: 130px !important;
+      }
     }
     &--name {
       color: $col-deep-black;

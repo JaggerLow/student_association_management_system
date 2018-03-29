@@ -78,7 +78,14 @@
       </el-form-item>
     </el-form>
     <div class="s-basicinfo__logo">
-      <div class="s-basicinfo__logo--image"></div>
+      <div class="s-basicinfo__logo--image">
+        <img
+          v-if="[null, ''].indexOf(info.form.logo) > -1"
+          src="../../../assets/default_club.jpg">
+        <img
+          v-else
+          :src="info.form.logo">
+      </div>
       <div class="s-basicinfo__logo--button" @click.stop="uploadImage">上传图片</div>
     </div>
   </div>
@@ -259,11 +266,15 @@ export default {
         }
       }
       &--image {
-        background: #eee;
         border: 1px solid $col-border;
         height: 200px;
         margin-bottom: 20px;
+        overflow: hidden;
         width: 100%;
+        img {
+          display: block;
+          height: 200px;
+        }
       }
     }
   }

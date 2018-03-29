@@ -28,7 +28,10 @@
                 <div class="s-userinfo__left--text">{{ userinfo.form.startYear }}</div>
               </div>
             </div>
-            <div class="s-userinfo__right"></div>
+            <div class="s-userinfo__right">
+              <img v-if="['', null].indexOf(userinfo.form.image) > -1" src="../../assets/default_img.jpg">
+              <img v-else :src="userinfo.form.image">
+            </div>
           </div>
           <div class="s-userinfo__info">
             <div class="s-userinfo__info--item">
@@ -153,7 +156,13 @@ export default {
       float: left;
       height: 150px;
       margin-left: 30px;
+      overflow: hidden;
       width: 150px;
+      img {
+        display: block;
+        height: 150px;
+        width: 150px;
+      }
     }
     &__info {
       margin-top: 10px;

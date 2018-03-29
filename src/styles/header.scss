@@ -30,26 +30,22 @@
       width: 100%;
     }
     &--nav {
-      align-items: center;
       color: $col-deepest-gray;
-      display: flex;
-      display: -webkit-flex;
       cursor: default;
       float: left;
       height: 100%;
       line-height: 60px;
       overflow: hidden;
       position: relative;
-      justify-content: center;
       width: 600px;
       li { 
         cursor: pointer;
-        flex: 1;
         float: left;
         list-style-type: none;
         overflow: hidden;
         position: relative;
         text-align: center;
+        width: 150px;
         &:hover {
           color: $col-dark-blue;
           .s-header__main--navline {

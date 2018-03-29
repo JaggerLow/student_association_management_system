@@ -61,7 +61,7 @@ export default {
           account: '',
           password: ''
         },
-        checkProp: {
+        mustProp: {
           account: true,
           password: true
         },

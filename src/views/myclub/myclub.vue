@@ -20,6 +20,12 @@
           :key="index">
           <div
             class="s-box__club--logo">
+            <img
+              v-if="[null, ''].indexOf(club.logo) > -1"
+              src="../../assets/default_club.jpg">
+            <img
+              v-else
+              :src="club.logo">
           </div>
           <div class="s-box__club--info">
             <div class="s-box__club--name">

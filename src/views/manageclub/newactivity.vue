@@ -333,8 +333,8 @@ export default {
       }
       img {
         left: 50%;
-        max-height: 400px;
-        max-width: 300px;
+        height: 400px;
+        width: 300px;
         position: absolute;
         top: 50%;
         transform: translateX(-50%) translateY(-50%);

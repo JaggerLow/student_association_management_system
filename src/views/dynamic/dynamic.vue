@@ -1,7 +1,19 @@
 <template>
   <div class="s-dynamic">
     <div class="s-dynamic__news">
-      社团新闻
+      <div class="s-dynamic__box">
+        <el-carousel height="640px">
+          <el-carousel-item>
+            <img src="../../assets/qingjingju.jpg" alt="公告图片">
+          </el-carousel-item>
+          <el-carousel-item>
+            <img src="../../assets/huihua.jpg" alt="公告图片">
+          </el-carousel-item>
+          <el-carousel-item>
+            <img src="../../assets/manhua.jpg" alt="公告图片">
+          </el-carousel-item>
+        </el-carousel>
+      </div>
     </div>
     <div class="s-dynamic__list">
       <div class="s-box__context s-dynamic__box">
@@ -41,6 +53,12 @@
             :key="index">
             <div
               class="s-box__club--logo">
+              <img
+                v-if="[null, ''].indexOf(club.logo) > -1"
+                src="../../assets/default_club.jpg">
+              <img
+                v-else
+                :src="club.logo">
             </div>
             <div class="s-box__club--info">
               <div class="s-box__club--name">
@@ -142,11 +160,18 @@ export default {
   @import '../../styles/core/var';
 
   .s-dynamic {
+    &__box {
+      margin: 0 auto;
+      width: 1200px;
+      img {
+        display: block;
+        height: 640px;
+        width: 1200px;
+      }
+    }
     &__news {
-      background: #999;
-      line-height: 400px;
+      background: $col-lighter-blue;
       min-height: 400px;
-      text-align: center;
       min-width: 1200px;
     }
     &__list {

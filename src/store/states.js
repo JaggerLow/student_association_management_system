@@ -18,19 +18,21 @@ export default {
     ename: 'dynamic',
     link: '/dynamic',
     focus: false
-  },
-  {
-    name: '课程表',
-    ename: 'schedule',
-    link: '/schedule',
-    focus: false
-  },
-  {
-    name: '社区讨论',
-    ename: 'discuss',
-    link: '/discuss',
-    focus: false
-  }],
+  }
+  // ,
+  // {
+  //   name: '课程表',
+  //   ename: 'schedule',
+  //   link: '/schedule',
+  //   focus: false
+  // },
+  // {
+  //   name: '社区讨论',
+  //   ename: 'discuss',
+  //   link: '/discuss',
+  //   focus: false
+  // }
+  ],
   clubType: [{
     label: '学术类',
     value: 0
