@@ -2,7 +2,7 @@
   <div>
     <div class="s-box__context">
       <div class="s-box__header">
-        我的社团
+        {{ userInfo.isMaster ? '社团管理' : '我的社团' }}
         <el-button class="s-myclub__header--button" type="primary" @click.stop="openNewClub">创建社团</el-button>
       </div>
       <div
@@ -11,7 +11,7 @@
         <div
           v-if="myclub.list.length === 0"
           class="s-myclub__listempty">
-          你没有加入任何社团，快去加入社团充实校园生活吧~~
+          {{ userInfo.isMaster ? '该系统暂无社团' : '你没有加入任何社团，快去加入社团充实校园生活吧~~' }}
         </div>
         <div
           v-for="(club, index) in myclub.list"

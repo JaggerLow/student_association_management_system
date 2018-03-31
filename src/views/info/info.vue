@@ -118,7 +118,7 @@
       </el-form>
       <div class="s-info__avatar">
         <div class="s-info__avatar--image">
-          <img v-if="['', null].indexOf(info.image) > -1" src="../../assets/default_img.jpg">
+          <img v-if="['', null].indexOf(info.form.image) > -1" src="../../assets/default_img.jpg">
           <img v-else :src="info.form.image">
         </div>
         <div class="s-info__avatar--button" @click.stop="uploadImage">上传头像</div>

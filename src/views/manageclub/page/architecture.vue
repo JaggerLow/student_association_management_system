@@ -47,7 +47,7 @@
           v-for="(position, index) in architecture.position"
           class="s-architecture__box--card"
           :key="index">
-          <span>{{ position.name }}</span><i class="fa fa-close"></i>
+          <span>{{ position.name }}</span><i class="fa fa-close" @click.stop="deleteClubPosition(position.id)"></i>
         </div>
       </div>
     </div>
@@ -125,6 +125,25 @@ export default {
           type: 'success'
         })
         self.getClubDepartment()
+      }
+    },
+
+    /**
+     * 删除职位操作
+     */
+    async deleteClubPosition (id) {
+      let self = this
+      let packageData = {
+        clubId: self.architecture.clubId,
+        id: id
+      }
+      let data = await self.$wPost('/deal/club/deletePosition.do', packageData)
+      if (data.data) {
+        self.$message({
+          message: '操作成功！',
+          type: 'success'
+        })
+        self.getPosition()
       }
     }
   },

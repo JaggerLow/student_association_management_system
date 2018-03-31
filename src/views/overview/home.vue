@@ -48,158 +48,164 @@
             <div class="s-home__news--rightside">
               <div
                 v-show="showPage === 1"
+                @mouseover="changeShow(1)"
+                @mouseout="startRoll"
                 class="s-home__news--item">
                 <div class="s-home__news--title">
                   <span class="s-home__news--titletext">
-                    这是一则新闻
+                    SAMS学生社团管理系统上线啦！！
+                  </span>
+                  <span>2017-11-28</span>
+                </div>
+                <div class="s-home__news--normaltitle">
+                  <span class="s-home__news--normaltext">
+                    第十届社团文化节：交织社团情，幻化青春梦！
                   </span>
                   <span>2018-03-28</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则新闻
+                    高校联盟，携手护肝
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-20</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则新闻
+                    社团招新季来了，你们准备好了么！！
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-09</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则新闻
+                    春暖花开日，温情社工周
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-08</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则新闻
+                    新学期，新征程，新挑战！
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-07</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则新闻
+                    做最开放自由的的系统，办最和谐有趣的社团。
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2017-11-28</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则新闻
+                    加入学生社团，充实校园生活。
                   </span>
-                  <span>2018-03-28</span>
-                </div>
-                <div class="s-home__news--normaltitle">
-                  <span class="s-home__news--normaltext">
-                    这是一则新闻
-                  </span>
-                  <span>2018-03-28</span>
+                  <span>2017-11-28</span>
                 </div>
               </div>
               <div
                 v-show="showPage === 2"
+                @mouseover="changeShow(2)"
+                @mouseout="startRoll"
                 class="s-home__news--item">
                 <div class="s-home__news--title">
                   <span class="s-home__news--titletext">
-                    这是一则公告
+                    修复头像上传问题
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-25</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则公告
+                    对部分系统bug的修改
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-09</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则公告
+                    学生社团管理系统基本框架已完成
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-09</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则公告
+                    系统各接口联调均已完成
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-07</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则公告
+                    忘记密码功能以上线
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-06</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则公告
+                    确定系统产品logo
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-05</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则公告
+                    个人信息编辑接口联调
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-05</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则公告
+                    登录注册板块已完成
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-04</span>
                 </div>
               </div>
               <div
                 v-show="showPage === 3"
+                @mouseover="changeShow(3)"
+                @mouseout="startRoll"
                 class="s-home__news--item">
                 <div class="s-home__news--title">
                   <span class="s-home__news--titletext">
-                    这是一则活动
+                    【十万奖金】“梦娃”故事征文、形象设计大赛
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-18</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则活动
+                    2018年第二届全国大学生预防艾滋病知识竞赛
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2018-03-15</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则活动
+                    “我为校园添光彩”团组织
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2017-12-06</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则活动
+                    “大学有我，共铸辉煌”团组织
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2017-12-04</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则活动
+                    “梦想与现实”学习交流会
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2017-12-03</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则活动
+                    大学生8人制足球联赛
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2017-12-02</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则活动
+                    五子棋挑战赛
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2017-12-01</span>
                 </div>
                 <div class="s-home__news--normaltitle">
                   <span class="s-home__news--normaltext">
-                    这是一则活动
+                    三对三篮球赛
                   </span>
-                  <span>2018-03-28</span>
+                  <span>2017-11-30</span>
                 </div>
               </div>
             </div>

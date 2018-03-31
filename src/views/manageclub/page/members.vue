@@ -107,7 +107,7 @@
               </div>
               <div>
                 <span
-                  v-if="mamageclub.premit === 1"
+                  v-if="mamageclub.premit === 1 && scope.row.permit !== 1"
                   class="s-table__operate--default" @click.stop="openClubPermit(scope.row)">
                   权限
                 </span>

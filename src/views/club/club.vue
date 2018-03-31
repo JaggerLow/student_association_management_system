@@ -371,6 +371,7 @@ export default {
       &--card {
         border: 1px solid $col-border;
         border-radius: 4px;
+        margin: 10px 0 0 0;
         min-height: 200px;
         overflow: hidden;
         padding: 10px 20px;
