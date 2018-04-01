@@ -52,7 +52,7 @@ let actions = {
     let data = await Vue.wPost('/deal/clubActivity/list.do', packageData)
     commit(types.ACTIVITY_SET_ACTIVITY, {
       table: data.data.records,
-      count: data.data.count
+      count: data.data.pageCount
     })
   }
 }
