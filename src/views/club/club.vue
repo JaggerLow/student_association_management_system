@@ -119,7 +119,8 @@
                 社团相册
                 <span
                   v-if="club.info.albumList.length !== 0"
-                  class="s-club__more">
+                  class="s-club__more"
+                  @click="openImage(0)">
                   更多图片
                 </span>
               </div>
@@ -132,7 +133,8 @@
                 <div
                   v-for="(img, index) in club.info.albumList"
                   class="s-club__article--img"
-                  :key="index">
+                  :key="index"
+                  @click="openImage(index)">
                   <img :src="img.url" alt="社团相册">
                 </div>
               </div>
@@ -163,6 +165,7 @@
         </div>
       </div>
     </div>
+    <s-dialog-clubimage></s-dialog-clubimage>
   </div>
 </template>
 <script>
@@ -175,7 +178,8 @@ export default {
       userInfo: 'userInfo',
       clubType: 'clubType',
       clubLevel: 'clubLevel',
-      club: 'viewsClub/club'
+      club: 'viewsClub/club',
+      image: 'viewsClub/image'
     })
   },
   methods: {
@@ -183,6 +187,7 @@ export default {
       getUserInfo: 'sUserinfo/getUserInfo',
       updateUserinfo: 'sUserinfo/updateUserinfo',
       updateClub: 'viewsClub/updateClub',
+      updateImage: 'viewsClub/updateImage',
       getClub: 'viewsClub/getClub'
     }),
 
@@ -206,6 +211,24 @@ export default {
           albumList: [],
           memberList: []
         }
+      })
+      self.updateImage({
+        show: false,
+        url: '',
+        index: 0,
+        list: []
+      })
+    },
+
+    /**
+     * 打开更多图片
+     */
+    openImage (index) {
+      let self = this
+      self.updateImage({
+        show: true,
+        index: index,
+        url: self.image.list[index].url
       })
     },
 
@@ -313,6 +336,7 @@ export default {
       &--img {
         float: left;
         background: $col-light-gray;
+        cursor: pointer;
         height: 110px;
         margin: 5px 9px;
         position: relative;

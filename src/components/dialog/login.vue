@@ -47,7 +47,8 @@ export default {
   methods: {
     ...mapActions({
       updateUserInfo: 'updateUserInfo',
-      updateLoginWindow: 'sLogin/updateLoginWindow'
+      updateLoginWindow: 'sLogin/updateLoginWindow',
+      getClub: 'viewsClub/getClub'
     }),
 
     /**
@@ -166,6 +167,7 @@ export default {
             username: data.data.username,
             userId: data.data.userId,
             isMaster: data.data.isMaster,
+            image: data.data.image,
             isLogin: true
           }
           self.$message({
@@ -174,7 +176,9 @@ export default {
           })
           self.updateUserInfo(userInfo)
           self.initData()
-          location.reload()
+          if (window.location.pathname === '/club') {
+            self.getClub()
+          }
         } else {
           self.$message.error('登录失败，账号或者密码错误！')
         }

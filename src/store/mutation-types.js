@@ -59,3 +59,4 @@ export const ALBUM_SET_ALBUM = 'ALBUM_SET_ALBUM'
 
 // 社团首页
 export const CLUB_SET_CLUB = 'CLUB_SET_CLUB'
+export const CLUB_SET_IMAGE = 'CLUB_SET_IMAGE'
