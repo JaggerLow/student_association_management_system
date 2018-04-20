@@ -13,6 +13,7 @@ Vue.use(Router)
 sync(store, router)
 
 router.beforeEach(async (to, from, next) => {
+  document.documentElement.scrollTop = 0
   store.dispatch('checkLogin')
   let nowPath = to.path
   nowPath = nowPath.split('/')
